@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+
+<h1>Tutorial</h1>
+Blablablablabla
+<h1>Question {{ question_nr }}  </h1>
+<br /> {{premise1}}
+<br /> {{premise2}}
+<br />
+	<form id="test_form" method="POST" action="/maxi/experiment/{{id}}/{{question_nr}}/" enctype="multipart/form-data">
+	
+	{% csrf_token %}
+	{% for hidden in form.hidden_fields %}
+		{{ hidden }}
+	{% endfor %}
+	
+	{% for field in form.visible_fields %}
+		{{ field.errors }}
+		{{ field.help_text }}
+		{{ field }}
+	{% endfor %}
+	
+	<input type="submit" name="submit" value="Submit answers" />
+	</form>
+
+<img src="{% static "images/haga.jpg" %}" alt="Aristotle" />
+
+<h1>{{form.errors}}</h1>
+
+{% if question_nr <= 30 %}
+<a href="/maxi/experiment/{{id}}/{{next_nr}}/">Click to submit and complete experiment</a>
+{% else %}
+<a href="/maxi/postexperiment/{{id}}/">Click to finish</a>
+{% endif %}
+
+<br />
+
+{% endblock %}

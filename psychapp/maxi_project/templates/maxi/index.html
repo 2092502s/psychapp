@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+<h1>Welcome </h1>
+	<form id="consent_form" method="post" action="/maxi/">
+	
+	{% csrf_token %}
+	{% for hidden in form.hidden_fields %}
+		{{ hidden }}
+	{% endfor %}
+	
+	{% for field in form.visible_fields %}
+		{{ field.errors }}
+		{{ field.help_text }}
+		{{ field }}
+	{% endfor %}
+	
+	<input type="submit" name="submit" value="Submit answers" />
+	</form>
+<br />
+<a href="/maxi/preexperiment/{{id}}/">Let's start the experiment"</a>
+<br />
+{% endblock %}

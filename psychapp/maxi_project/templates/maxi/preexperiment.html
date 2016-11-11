@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+<h1>Pre-experimental questions</h1>
+<br />
+
+	<form id="intro_form" method="post" action="/maxi/preexperiment/{{id}}/">
+	<ul style="list-style-type:none">
+	{% csrf_token %}
+	{% for hidden in form.hidden_fields %}
+		<li>{{ hidden }}</li>
+	{% endfor %}
+	
+	{% for field in form.visible_fields %}
+		<li>{{ field.errors }}
+		{{ field.help_text }}
+		{{ field }}</li>
+	{% endfor %}
+	</ul>
+	<input type="submit" name="submit" value="Submit answers" />
+	</form>
+<a href="/maxi/tutorial/{{id}}/">Click to start the experiment</a>
+<br />
+{% endblock %}

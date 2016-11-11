@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+
+
+<h1>Question 2</h1>
+<h2>{{premise1}}</h2><br>
+<h2>{{premise2}}</h2><br>
+<h2>{{conclusion}}</h2><br>
+<br /><h2>
+	<form id="test_form" method="post" action="/maxi/experiment2/{{id}}/">
+	
+	{% csrf_token %}
+	{% for hidden in form.hidden_fields %}
+		{{ hidden }}
+	{% endfor %}
+	
+	{% for field in form.visible_fields %}
+		{{ field.errors }}
+		{{ field.help_text }}
+		{{ field }}
+	{% endfor %}
+	
+	<input type="submit" name="submit" value="Submit answers" />
+	</form></h2>
+
+<a href="/maxi/experiment3/{{id}}/">Click to submit and complete experiment</a>
+<br />
+
+{% endblock %}

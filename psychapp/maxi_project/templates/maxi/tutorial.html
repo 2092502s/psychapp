@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+<h1>Syllogism Tutorial</h1>
+<br />
+
+<p>
+An <b>argument</b> is a group of statements about the state of the world. If <b>valid</b>, the components of some statements, called 
+<b>premises</b>, are arranged in such a manner so that is is impossible for the them to be true and another statement, called the 
+<b>conclusion</b>, not be true. The premises are said to "imply" the conclusion. 
+</p>
+
+<p>
+A <b>syllogism</b> is an argument that has two premises and one conclusion
+
+A syllogism is <b>categorical</b> when all statements
+</p>
+
+<p>
+
+</p>
+<img src="{% static "images/premises.png" %}" alt="Premises" />
+<a href="/maxi/experiment/{{id}}/1/">Click to start the experiment</a>
+<br />
+{% endblock %}
