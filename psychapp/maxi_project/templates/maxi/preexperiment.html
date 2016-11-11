@@ -3,7 +3,7 @@
 {% block body_block %}
 <h1>Pre-experimental questions</h1>
 <br />
-
+{% if not submitted %}
 	<form id="intro_form" method="post" action="/maxi/preexperiment/{{id}}/">
 	<ul style="list-style-type:none">
 	{% csrf_token %}
@@ -19,6 +19,8 @@
 	</ul>
 	<input type="submit" name="submit" value="Submit answers" />
 	</form>
+{% else %}
 <a href="/maxi/tutorial/{{id}}/">Click to start the experiment</a>
 <br />
+{% endif %}
 {% endblock %}

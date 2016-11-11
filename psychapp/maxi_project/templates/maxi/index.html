@@ -2,7 +2,25 @@
 {% load staticfiles %}
 
 {% block body_block %}
-<h1>Welcome </h1>
+<h1>Thank you for your interest in my MAXI-project experiment!</h1>
+<img src="{% static "images/aristotle.jpg" %}" alt="Aristotle" /></div>
+<h2>Here's some additional information:</h2>
+
+<div>
+<ul>
+<li>The experiment will only take 30-40 minutes.</li>
+<li>The experiment concerns reasoning processes, but will in no way test your intelligence.</li>
+<li>Please stay focused and do the experiment in a quiet place.</li>
+<li>
+You are free to withdraw from the experiment at any time, but please don't take any break during the duration of it.
+</li>
+<li>Your participation is anonymous: personal data will be safely stored separately from experimental data.</li>
+<li>Please do not participate more than once.</li>
+
+</ul>
+{% if not submitted %}
+</div>
+
 	<form id="consent_form" method="post" action="/maxi/">
 	
 	{% csrf_token %}
@@ -16,9 +34,11 @@
 		{{ field }}
 	{% endfor %}
 	
-	<input type="submit" name="submit" value="Submit answers" />
+	<input type="submit" name="submit" value="Submit consent" />
 	</form>
+{% else %}
 <br />
-<a href="/maxi/preexperiment/{{id}}/">Let's start the experiment"</a>
+<a href="/maxi/preexperiment/{{id}}/">Click to start the experiment</a>
 <br />
+{% endif %}
 {% endblock %}

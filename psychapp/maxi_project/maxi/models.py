@@ -4,11 +4,12 @@ from django.db import models
 # Create your models here.
 class Subject(models.Model):
 	consent = models.BooleanField(default=False)
-	name = syllogism_order = models.CharField(max_length=500, default="Unknown")
+	name = models.IntegerField(null=True)
 	#subject_nr = models.PositiveSmallIntegerField(unique=True)
 	syllogism_order = models.CharField(max_length=500, null=False)
 	#questions = models.ForeignKey(Question)
 	#id = models.AutoField(primary_key=True)
+	start_time = models.CharField(max_length=8, null=True)
 	
 
 	GENDERS = (('F', 'Female'),('M','Male'),('N', 'Not disclosed'))
@@ -26,10 +27,10 @@ class Subject(models.Model):
 	post2 = models.CharField(max_length=1, choices=FAMILIARITY2, blank=True, null=True)
 
 	def __unicode__(self):
-		return self.name
+		return str(self.name)
 		
 	def __str__(self):
-		return self.name
+		return str(self.name)
 
 class Question(models.Model):
         ANSWER_OPTIONS = (('A','All C are A'),('B','No C are A'),('C','Some C are A'),('D','Some C are not A'),('E','No valid conclusion'))
@@ -41,9 +42,10 @@ class Question(models.Model):
         subject = models.ForeignKey(Subject)
 
         def __unicode__(self):
-                return self.nr_code
+                return "Subject" + str(self.subject.name) + "Q" + nr_code
         def __str__(self):
-                return self.nr_code
+                #return self.nr_code
+                return "Subject" + str(self.subject.name) + "Q" + nr_code
 
 ##	ex1 = models.CharField(max_length=1, choices=ANSWER_OPTIONS, null=True, blank=True)
 ##	starttime1 = models.CharField(max_length=8, null=True)	

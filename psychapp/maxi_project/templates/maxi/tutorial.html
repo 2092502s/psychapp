@@ -3,7 +3,9 @@
 {% block body_block %}
 <h1>Syllogism Tutorial</h1>
 <br />
+<div>
 
+<h2>Syllogisms</h2>
 <p>
 An <b>argument</b> is a group of statements about the state of the world. If <b>valid</b>, the components of some statements, called 
 <b>premises</b>, are arranged in such a manner so that is is impossible for the them to be true and another statement, called the 
@@ -12,14 +14,45 @@ An <b>argument</b> is a group of statements about the state of the world. If <b>
 
 <p>
 A <b>syllogism</b> is an argument that has two premises and one conclusion
-
+<img src="{% static "images/premises.png" %}" alt="Premises" />
 A syllogism is <b>categorical</b> when all statements
 </p>
 
+<h2>Euler Diagrams</h2>
 <p>
 
 </p>
-<img src="{% static "images/premises.png" %}" alt="Premises" />
-<a href="/maxi/experiment/{{id}}/1/">Click to start the experiment</a>
+<h2>Your Task</h2>
+<p>You will now be given a set of syllogistic problems.
+Given the two premises, you are asked to select which of the conclusions is valid.</p>
+
+
+<p>Please answer as quickly and accurately as possible.</p>
+
+{% if not submitted %}
+
+<div>
+	<form id="start_form" method="post" action="/maxi/tutorial/{{id}}/">
+	
+	{% csrf_token %}
+	{% for hidden in form.hidden_fields %}
+		{{ hidden }}
+	{% endfor %}
+	
+	{% for field in form.visible_fields %}
+		{{ field.errors }}
+		{{ field.help_text }}
+		{{ field }}
+	{% endfor %}
+	
+	<input type="submit" name="submit" value="Submit consent" />
+	</form>
+	</div>
+	
+{% else %}
+
+<a href="/maxi/experiment/{{id}}/1/"> Click to start the experiment</a>
 <br />
+
+{% endif %}
 {% endblock %}

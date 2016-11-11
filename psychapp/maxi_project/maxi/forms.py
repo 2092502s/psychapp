@@ -2,30 +2,33 @@ from django import forms
 from maxi.models import Subject, Question
 
 class ConsentForm(forms.ModelForm):
-	
-	consent = forms.BooleanField(help_text="Consent")
+	#name = forms.CharField(max_length=500, help_text="Your Name")
+	consent = forms.BooleanField(help_text="I consent to participate")
 	class Meta:
 		model = Subject
-		fields = ('consent','name',)
+		fields = ('consent',)
+
+class StartForm(forms.Form):
+	start = forms.BooleanField(help_text="Tick to confirm you are ready to start the experiment")
 
 class IntroForm(forms.ModelForm):
 
 	GENDERS = (('F', 'Female'),('M','Male'),('N', 'Not disclosed'))
-	preq1 = forms.ChoiceField(choices=GENDERS, help_text="Are you male or female?")
+	preq1 = forms.ChoiceField(choices=GENDERS, help_text="Are you male or female?",widget=forms.RadioSelect)
 	preq2 = forms.IntegerField(help_text="What is your age?")
 	DISCIPLINES = (('A', 'Arts & Humanities'), ('B','Computing & Engineering'), ('C','Social Sciences'),('D','Natural Sciences'),('E','Not at University'))
-	preq3 = forms.ChoiceField(choices=DISCIPLINES, help_text="If at university, which discipline do you study?")
-	FAMILIARITY = (('A','No familiarity at all'),('B','Vaguely familiar'),('C','Very familiar'))
-	preq4 = forms.ChoiceField(choices=FAMILIARITY, help_text="How familiar are you with syllogisms?")
+	preq3 = forms.ChoiceField(choices=DISCIPLINES, help_text="If at university, which discipline do you study?", widget=forms.RadioSelect)
+	#FAMILIARITY = (('A','No familiarity at all'),('B','Vaguely familiar'),('C','Very familiar'))
+	#preq4 = forms.ChoiceField(choices=FAMILIARITY, help_text="How familiar are you with syllogisms?", widget=forms.CheckboxSelectMultiple)
 
 	class Meta:
 		model = Subject
-		fields = ('preq1', 'preq2','preq3','preq4',)
+		fields = ('preq1', 'preq2','preq3',)
 
 ANSWER_OPTIONS = (('A','All C are A'),('B','No C are A'),('C','Some C are A'),('D','Some C are not A'),('E','No valid conclusion'))
 
 class QuestionForm(forms.ModelForm):
-        answer = forms.ChoiceField(help_text="Select the correct answer", choices=ANSWER_OPTIONS)
+        answer = forms.ChoiceField(help_text="Select the valid conclusion", choices=ANSWER_OPTIONS, widget=forms.RadioSelect)
         class Meta:
                 model = Question
                 fields = ('answer',)
@@ -218,9 +221,9 @@ class QuestionForm(forms.ModelForm):
 		
 class EndForm(forms.ModelForm):
 	USE_OF_DIAGRAMS = (('1','1'),('2','2'),('3','3'),('4','4'),('5','5'))	
-	post1 = forms.ChoiceField(choices=USE_OF_DIAGRAMS, help_text="To what extent did you make use of diagrams in your solutions?")
+	post1 = forms.ChoiceField(choices=USE_OF_DIAGRAMS, help_text="To what extent did you make use of diagrams in your solutions?", widget=forms.RadioSelect)
 	FAMILIARITY2 = (('1','Not familiar'),('2','Vaguely familiar'),('3','Very familiar'))
-	post2 = forms.ChoiceField(choices=FAMILIARITY2, help_text="How familiar were you with the diagram used?")
+	post2 = forms.ChoiceField(choices=FAMILIARITY2, help_text="How familiar were you with the diagram used?", widget=forms.RadioSelect)
 
 	
 	class Meta:

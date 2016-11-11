@@ -2,11 +2,14 @@
 {% load staticfiles %}
 {% block body_block %}
 
-<h1>Tutorial</h1>
-Blablablablabla
-<h1>Question {{ question_nr }}  </h1>
-<br /> {{premise1}}
-<br /> {{premise2}}
+<h3>Question {{ question_nr }}  </h3>
+<h1> <br /> {{premise1}} </h1>
+<h1> <br /> {{premise2}} </h1>
+
+{% if not submitted %}
+<div>
+--------------------------------------------------------------------------------
+<h3>
 <br />
 	<form id="test_form" method="POST" action="/maxi/experiment/{{id}}/{{question_nr}}/" enctype="multipart/form-data">
 	
@@ -23,15 +26,14 @@ Blablablablabla
 	
 	<input type="submit" name="submit" value="Submit answers" />
 	</form>
-
-<img src="{% static "images/haga.jpg" %}" alt="Aristotle" />
-
-<h1>{{form.errors}}</h1>
-
-{% if question_nr <= 30 %}
-<a href="/maxi/experiment/{{id}}/{{next_nr}}/">Click to submit and complete experiment</a>
+</h3>
+</div>
 {% else %}
-<a href="/maxi/postexperiment/{{id}}/">Click to finish</a>
+{% if question_nr <= 30 %}
+<a href="/maxi/experiment/{{id}}/{{next_nr}}/">Next question</a>
+{% else %}
+<a href="/maxi/postexperiment/{{id}}/">Finish</a>
+{% endif %}
 {% endif %}
 
 <br />
