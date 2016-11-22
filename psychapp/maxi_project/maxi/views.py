@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-#from maxi.forms import IntroForm, EndForm, ConsentForm, TestForm1, TestForm2, TestForm3, TestForm4, TestForm5, TestForm6, TestForm7, TestForm8, TestForm9, TestForm10, TestForm11, \
-#TestForm12, TestForm13, TestForm14, TestForm15, TestForm16, TestForm17, TestForm18, TestForm19, TestForm20, TestForm21, TestForm22, TestForm23, TestForm24, TestForm25, TestForm26, \
-#TestForm27, TestForm28, TestForm29, TestForm30, TestForm31
-from maxi.forms import IntroForm, EndForm, ConsentForm, QuestionForm, StartForm
-from maxi.models import Subject, Question
+
+from maxi.forms import TutorialForm, EndForm, QuestionForm, StartForm, ParticipantForm, ConsentForm
+from maxi.models import Subject, Question, Participant
 from time import gmtime, strftime
-from random import shuffle
+from datetime import tzinfo, timedelta, datetime
+from random import shuffle, randint
 import csv
+
 
 ##################################################################################################
 quantifiers = 	[["all","all"],
@@ -144,27 +144,36 @@ def create_code_list():
 #format:
 # SUBJECT_NR # QUESTION_CODE # DURATION
 def generate_csv():
-	with open('demographic_data.csv','w', newline="") as csvfile:
+	with open('static/docs/demographic_data.csv','w', newline="") as csvfile:
 		writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-		#writer.writerow(["ID","Gender","Age","Discipline","Diagam_Use","Familiarity"])
+		writer.writerow(['ID','Gender','Age','Discipline', 'Confidence', 'Tutorial_Exp','Logic_Experience','Diagam_Use','Familiarity','Condition'])
 		all_subjects = Subject.objects.all()
 		for subject in all_subjects:
 			name = subject.name
 			gender = subject.preq1
 			age = str(subject.preq2)			#Note: it's a string
+			confidence = subject.confidence
+			condition = subject.condition
 			discipline = subject.preq3
+			logic = subject.post0
 			diagram_use = subject.post1 		#Note: it's a string
 			familiarity = subject.post2
 			
+			tutorial_start = subject.tutorial_start
+			tutorial_end = subject.start_time
+			dt = tutorial_start - tutorial_end
+			tut_duration = dt.total_seconds()
+			
 			#######WRITE INTO FILE
-			writer.writerow([name, gender, age, discipline, diagram_use, familiarity])
+			writer.writerow([name, gender, age, discipline, confidence, tut_duration, logic, diagram_use, familiarity, condition])
 
-	with open('experimental_data.csv','w', newline="") as csvfile:
+	with open('static/docs/experimental_data.csv','w', newline="") as csvfile:
 		writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-		#writer.writerow(["ID","Code","Order","Answer","Endtime","Correct"])		
+		writer.writerow(['ID','Condition','Code','Order','Answer','Duration','Correct'])		
 		all_subjects = Subject.objects.all()
 		for subject in all_subjects:
 			name = subject.name
+			condition = subject.condition
 			#PRINT SUBJECT
 			subject_qs = Question.objects.filter(subject=subject)
 			for question in subject_qs:
@@ -172,90 +181,123 @@ def generate_csv():
 				nr_code = question.nr_code
 				order_nr = question.order_nr
 				answer  = question.answer
-				endtime = question.endtime
+				if order_nr != "1":					#Unless it is the first question
+					#print(order_nr)
+					previous_nr = int(order_nr)-1	#Obtain the previous question-nr
+					previous_ones = subject_qs.filter(order_nr=str(previous_nr))
+					#print("Size is " + str(len(previous_ones)))
+					previous = previous_ones[0]
+					dt = question.endtime - previous.endtime
+				else:
+					dt = question.endtime - subject.start_time
+				duration = dt.total_seconds()
+				#time = dt.time
+				#duration = str(time.minute * 60 + time.second)
 				if answer == answers[int(nr_code)]:
 					correct = 1
 				else:
 					correct = 0
-				writer.writerow([name, nr_code, order_nr, answer, endtime, correct])
+				writer.writerow([name, condition, nr_code, order_nr, answer, duration, correct])
 	return
 #########################################################################################
+
+def data(request):
+	context_dict = {}
+	return render(request, 'maxi/data.html', context_dict)	
 
 def index(request):
 	#start_time = strftime("%M:%S", gmtime())
 	context_dict = {}
 	submitted = False
 	if request.method == 'POST':
-		form = ConsentForm(request.POST)
+		form1 = ParticipantForm(request.POST)
+		form2 = ConsentForm(request.POST)
 		#end_time = strftime("%M:%S", gmtime())
-		if form.is_valid():
-			subject = form.save(commit=False)		#Made false
+		if form1.is_valid() and form2.is_valid():
+			participant = form1.save(commit=True)
+			subject = form2.save(commit=False)					#Made false
 			subject.syllogism_order = create_random_order()
 			subject.save()
 			id = subject.id
 			context_dict['id']=id
 			subject.name = id
+			subject.tutorial_start = datetime.now()
+			#subject.condition = str(randint(0,1)) 	#Randomly choose condition
+			if id % 2 == 0:
+				subject.condition = 0
+			else:
+				subject.condition = 1
 			subject.save()		
 			context_dict['submitted']=True
 			return render(request, 'maxi/index.html', context_dict)
 		else:
-			print(form.errors)
+			print(form1.errors)
+			print(form2.errors)
 	else:
-		form = ConsentForm()
+		form1 = ParticipantForm()
+		form2 = ConsentForm()
 
 
-	context_dict = {'form': form, 'submitted':submitted}
+	context_dict = {'form1': form1, 'form2':form2, 'submitted':submitted}
 	return render(request, 'maxi/index.html', context_dict)
 
-def preexperiment(request, id):
-	context_dict = {}
-	context_dict['id']=id
-	#obtain user from database
-	instance = Subject.objects.get(id = id)
-	submitted=False
-
-	if request.method == 'POST':
-		form = IntroForm(request.POST, instance=instance)	#changed from 'or None'
-		if form.is_valid():
-			# print("Is preexperiment form valid?")
-			form.save()									#removed commit=True
-			# print("Now preexperimental data should be saved")
-			#return render(request, id)
-			submitted=True
-			context_dict['submitted']=True
-			return render(request, 'maxi/preexperiment.html', context_dict)		
-		else:
-			print(form.errors)
-	else:
-		form = IntroForm()
-
-		
-	context_dict['form'] = form 
-
-	context_dict['submitted']=submitted
-	return render(request, 'maxi/preexperiment.html', context_dict)
+#def preexperiment(request, id):
+#	context_dict = {}
+#	context_dict['id']=id
+#	#obtain user from database
+#	instance = Subject.objects.get(id = id)
+#	submitted=False
+#
+#	if request.method == 'POST':
+#		form = IntroForm(request.POST, instance=instance)	#changed from 'or None'
+#		if form.is_valid():
+#			# print("Is preexperiment form valid?")
+#			form.save()									#removed commit=True
+#			# print("Now preexperimental data should be saved")
+#			#return render(request, id)
+#			submitted=True
+#			context_dict['submitted']=True
+#			return render(request, 'maxi/preexperiment.html', context_dict)		
+#		else:
+#			print(form.errors)
+#	else:
+#		form = IntroForm()
+#
+#		
+#	context_dict['form'] = form 
+#
+#	context_dict['submitted']=submitted
+#	return render(request, 'maxi/preexperiment.html', context_dict)
 
 def tutorial(request, id):
 	context_dict = {}
 	context_dict['id']=id
 	instance = Subject.objects.get(id=id)
+	context_dict['condition'] = instance.condition
 	submitted = False
 	if request.method == 'POST':
-		form = StartForm(request.POST)
-		if form.is_valid():
-			cd = form.cleaned_data
+		form1 = TutorialForm(request.POST, instance=instance)
+		form2 = StartForm(request.POST)
+		if form1.is_valid() and form2.is_valid():
+			
+			form1.save(commit=True)
+			cd = form2.cleaned_data
 			start = cd.get('start')
 			#if start == True:
-			instance.start_time = strftime("%M:%S", gmtime())
+			#instance.start_time = strftime("%M:%S", gmtime())	
+			instance.start_time = datetime.now()
 			instance.save()
-			submitted=True
+			submitted = True
 			context_dict['submitted']=submitted
 			return render(request, 'maxi/tutorial.html', context_dict)	
 		else:
-			print(form.errors)
+			print(form1.errors)
+			print(form2.errors)
 	else:
-		form = StartForm()
-	context_dict['form']=form
+		form1 = TutorialForm()
+		form2 = StartForm()
+	context_dict['form1']=form1
+	context_dict['form2']=form2
 	context_dict['submitted']=submitted
 	return render(request, 'maxi/tutorial.html', context_dict)
 
@@ -271,9 +313,12 @@ def experiment(request, id, question_nr):
         syllogism_list = create_syllogism_list(syl_order)
 
         context_dict['id']= id
+        context_dict['condition'] = instance.condition
         context_dict['submitted']=submitted
         context_dict['premise1'] = syllogism_list[int(current_q)][0]
+        context_dict['image1']="images/" + syllogism_list[int(current_q)][0].replace(' ','') + ".png"
         context_dict['premise2'] = syllogism_list[int(current_q)][1]
+        context_dict['image2'] = "images/" + syllogism_list[int(current_q)][1].replace(' ','') + ".png"
         context_dict['question_nr'] = int(question_nr)
         context_dict['next_nr'] = int(question_nr) + 1
         if request.method == 'POST':
@@ -282,7 +327,8 @@ def experiment(request, id, question_nr):
                         answer = form.save(commit=False)
                         answer.nr_code= str(current_q)          #str of max_len 2
                         answer.order_nr= str(question_nr)
-                        answer.endtime= strftime("%M:%S", gmtime())
+                        #answer.endtime= strftime("%M:%S", gmtime())
+                        answer.endtime = datetime.now()
                         answer.subject = instance
                         answer.save()
                         submitted=True

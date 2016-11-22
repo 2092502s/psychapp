@@ -2,43 +2,42 @@
 {% load staticfiles %}
 
 {% block body_block %}
-<h1>Thank you for your interest in my MAXI-project experiment!</h1>
-<img src="{% static "images/aristotle.jpg" %}" alt="Aristotle" /></div>
+<h1>Welcome to participate in an experiment about reasoning</h1>
+
+<div style="float:left;"><img src="{% static "images/aristotle.jpg" %}" alt="Aristotle" /></div></div>
+<div style="width:1000px;">
+
 <h2>Here's some additional information:</h2>
 
-<div>
 <ul>
-<li>The experiment will only take 30-40 minutes.</li>
-<li>The experiment concerns reasoning processes, but will in no way test your intelligence.</li>
-<li>Please stay focused and do the experiment in a quiet place.</li>
-<li>
-You are free to withdraw from the experiment at any time, but please don't take any break during the duration of it.
-</li>
-<li>Your participation is anonymous: personal data will be safely stored separately from experimental data.</li>
-<li>Please do not participate more than once.</li>
-
+<li><h4>You need to be above 18 and English-speaking in order to participate.</h4></li>
+<li><h4>The experiment is estimated to take between 30-40 minutes.</h4></li>
+<li><h4>The experiment concerns reasoning processes, but will in not your intelligence.</h4></li>
+<li><h4>Please stay focused and do the experiment in a quiet place, without other tabs or programs open.</h4></li>
+<li><h4>Participation is completely voluntary. You are free to withdraw from the experiment at any time, but please don't take any break during the duration of it.</h4></li>
+<li><h4>Your participation is anonymous and completely confidential: personal data will be safely stored separately from experimental data.</h4></li>
+<li><h4>Please do not participate more than once. If your internet connection fails or the experiment is interrupted, your data 
+must be rejected, so please do not attempt it again.</h4></li>
+<li><h4>The results will be used in a dissertation project at the University of Glasgow.</h4></li>
+<li><h4>If you have questions or if you discover bugs in the website, please contact me at 2092502s@student.gla.ac.uk</h4></li>
 </ul>
-{% if not submitted %}
 </div>
 
+{% if not submitted %}
+
+<div style="padding-top:3cm;">
 	<form id="consent_form" method="post" action="/maxi/">
 	
 	{% csrf_token %}
-	{% for hidden in form.hidden_fields %}
-		{{ hidden }}
-	{% endfor %}
+	{{ form1.as_p }}
+	{{ form2.as_p }}
 	
-	{% for field in form.visible_fields %}
-		{{ field.errors }}
-		{{ field.help_text }}
-		{{ field }}
-	{% endfor %}
-	
-	<input type="submit" name="submit" value="Submit consent" />
+	<input type="submit" name="submit" id="submit" value="Submit consent" />
 	</form>
 {% else %}
 <br />
-<a href="/maxi/preexperiment/{{id}}/">Click to start the experiment</a>
+<a href="/maxi/tutorial/{{id}}/">Click to start the experiment</a>
 <br />
 {% endif %}
+</div>
 {% endblock %}
