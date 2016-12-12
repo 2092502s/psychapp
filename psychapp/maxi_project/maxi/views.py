@@ -10,76 +10,128 @@ import csv
 
 
 ##################################################################################################
-quantifiers = 	[["all","all"],
-				["all","all"],
-				["all","all"],
-				["all","some"],
-				["all","some"],
-				["all","some"],
-				["all","some"],
-				["some","all"],
-				["some","all"],
-				["some","all"],
-				["some","all"],
-				["all","no"],
-				["all","no"],
-				["all","no"],
-				["all","no"],
-				["no","all"],
-				["no","all"],
-				["no","all"],
-				["no","all"],
-				["all","some-not"],
-				["all","some-not"],
-				["all","some-not"],
-				["all","some-not"],
-				["some-not","all"],
-				["some-not","all"],
-				["some-not","all"],
-				["some-not","all"],
-				["no","some"],
-				["no","some"],
-				["no","some"],
-				["no","some"]]
+##quantifiers = 	[["all","all"],
+##				["all","all"],
+##				["all","all"],
+##				["all","some"],
+##				["all","some"],
+##				["all","some"],
+##				["all","some"],
+##				["some","all"],
+##				["some","all"],
+##				["some","all"],
+##				["some","all"],
+##				["all","no"],
+##				["all","no"],
+##				["all","no"],
+##				["all","no"],
+##				["no","all"],
+##				["no","all"],
+##				["no","all"],
+##				["no","all"],
+##				["all","some-not"],
+##				["all","some-not"],
+##				["all","some-not"],
+##				["all","some-not"],
+##				["some-not","all"],
+##				["some-not","all"],
+##				["some-not","all"],
+##				["some-not","all"],
+##				["no","some"],
+##				["no","some"],
+##				["no","some"],
+##				["no","some"]]
+
+
+quantifiers = [["all", "all"],
+                ["all", "some"],
+                ["some", "some"],
+                ["all", "some-not"],
+                ["some-not", "all"],
+                ["some", "some-not"],
+                ["some-not","some"],
+                ["some-not", "no"],
+                ["some-not","some-not"],
+                ["some-not","some-not"],
+                ["some-not","some-not"],
+                ["all", "all"],
+                ["all", "all"],
+                ["some","all"],
+                ["all", "no"],
+                ["no","all"],
+                ["no","some"],
+                ["some-not","all"],
+                ["some-not","all"]]
+               
 
 terms = [["A","B","C","B"],
-		["B","A","B","C"],
-		["A","B","B","C"],
-		["B","A","C","B"],
-		["A","B","C","B"],
-		["B","A","B","C"],
-		["A","B","B","C"],
-		["B","A","C","B"],
-		["A","B","C","B"],
-		["B","A","B","C"],
-		["A","B","B","C"],
-		["B","A","C","B"],
-		["A","B","C","B"],
-		["B","A","B","C"],
-		["A","B","B","C"],
-		["B","A","C","B"],
-		["A","B","C","B"],
-		["B","A","B","C"],
-		["A","B","B","C"],
-		["B","A","C","B"],
-		["A","B","C","B"],
-		["B","A","B","C"],
-		["A","B","B","C"],
-		["B","A","C","B"],
-		["A","B","C","B"],
-		["B","A","B","C"],
-		["A","B","B","C"],
-		["B","A","C","B"],
-		["A","B","C","B"],
-		["B","A","B","C"],
-		["A","B","B","C"]]
+        ["B","A","C","B"],
+         ["A","B","C","B"],
+         ["B","A","C","B"],
+         ["A","B","B","C"],
+         ["B","A","C","B"],
+         ["A","B","C","B"],
+         ["A","B","C","B"],
+         ["A","B","C","B"],
+         ["A","B","B","C"],
+         ["B","A","B","C"],
+         ["A","B","B","C"],
+         ["B","A","B","C"],
+         ["B","A","C","B"],
+         ["B","A","C","B"],
+         ["B","A","C","B"],
+         ["A","B","B","C"],
+         ["B","A","B","C"],
+         ["A","B","C","B"]]
+         
+         
 
-answers = ["N","N","N","I","N","I","N","N","N","I","I","N","E","N","E","E","E",
-           "N","N","N","O","N","N","N","N","O","N","O","O","O","O"]
 
-codes = ["AA2","AA3","AA4","AI1","AI2","AI3","AI4","IA1","IA2","IA3","IA4","AE1","AE2","AE3",
-         "AE4","EA1","EA2","EA3","EA4","AO1","AO2","AO3","AO4","OA1","OA2","OA3","OA4","EI1",
-         "EI2","EI3","EI4"]
+##terms = [["A","B","C","B"],
+##		["B","A","B","C"],
+##		["A","B","B","C"],
+##		["B","A","C","B"],
+##		["A","B","C","B"],
+##		["B","A","B","C"],
+##		["A","B","B","C"],
+##		["B","A","C","B"],
+##		["A","B","C","B"],
+##		["B","A","B","C"],
+##		["A","B","B","C"],
+##		["B","A","C","B"],
+##		["A","B","C","B"],
+##		["B","A","B","C"],
+##		["A","B","B","C"],
+##		["B","A","C","B"],
+##		["A","B","C","B"],
+##		["B","A","B","C"],
+##		["A","B","B","C"],
+##		["B","A","C","B"],
+##		["A","B","C","B"],
+##		["B","A","B","C"],
+##		["A","B","B","C"],
+##		["B","A","C","B"],
+##		["A","B","C","B"],
+##		["B","A","B","C"],
+##		["A","B","B","C"],
+##		["B","A","C","B"],
+##		["A","B","C","B"],
+##		["B","A","B","C"],
+##		["A","B","B","C"]]
+##
+##answers = ["N","N","N","I","N","I","N","N","N","I","I","N","E","N","E","E","E",
+##           "N","N","N","O","N","N","N","N","O","N","O","O","O","O"]
+
+##codes = ["AA2","AA3","AA4","AI1","AI2","AI3","AI4","IA1","IA2","IA3","IA4","AE1","AE2","AE3",
+##         "AE4","EA1","EA2","EA3","EA4","AO1","AO2","AO3","AO4","OA1","OA2","OA3","OA4","EI1",
+##         "EI2","EI3","EI4"]
+
+answers = [["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"],
+           ["Aac","Iac"],["Iac","Ica"],["Iac","Ica"],["Eac","Eca"],["Oac"],["Oac","Oca"],["Ica","Oca"],["Oac"]]
+           
+
+codes = ["NP1", "NP2", "NP3", "NN1", "NN2", "NN3", "NN4", "NN5", "NN6", "NN7", "NN8", "VP1",
+         "VP2", "VP3", "VN1", "VN2", "VN3", "VN4", "VN5"]
 
 ##################################################################################################
 def create_syllogism_list(syl_string):					#Takes a string of index-integers as argument.
@@ -93,7 +145,7 @@ def create_syllogism_list(syl_string):					#Takes a string of index-integers as 
 	syllogisms = []		#"A" and "A" are merely placeholders.
 		
 	#Now, collect the premises according to these indexes
-	for i in range(0,31):
+	for i in range(0,19):
 		idx = int(syl_list[i])				#This obtained index is used to refer to elements in the original order.
 		syllogisms.append([])
 		for j in (0,1):
@@ -120,7 +172,7 @@ def create_syllogism_list(syl_string):					#Takes a string of index-integers as 
 
 def create_random_order():
 
-	syl_list = list(range(0,31))
+	syl_list = list(range(0,19))
 	shuffle(syl_list)
 	syl_string = '-'.join(str(x) for x in syl_list)
 	print(syl_string)
@@ -128,11 +180,11 @@ def create_random_order():
 
 
 def create_code_list():
-	syl_list = list(range(0,31))
+	syl_list = list(range(0,19))
 	syl_order = syl_list
 	shuffle(syl_order)
 	syllogism_codes = syl_order[:]
-	for i in range(31):
+	for i in range(19):
 		idx = syl_order[i]
 		syllogism_codes[i] = codes[idx]
 
@@ -146,7 +198,7 @@ def create_code_list():
 def generate_csv():
 	with open('static/docs/demographic_data.csv','w', newline="") as csvfile:
 		writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-		writer.writerow(['ID','Gender','Age','Discipline', 'Confidence', 'Tutorial_Exp','Logic_Experience','Diagam_Use','Familiarity','Condition'])
+		writer.writerow(['ID','Gender','Age','Discipline', 'Confidence', 'Tutorial_Exp','Logic_Experience','Diagam_Use','Familiarity','Location','Condition'])
 		all_subjects = Subject.objects.all()
 		for subject in all_subjects:
 			name = subject.name
@@ -158,6 +210,7 @@ def generate_csv():
 			logic = subject.post0
 			diagram_use = subject.post1 		#Note: it's a string
 			familiarity = subject.post2
+			location = subject.post3
 			
 			tutorial_start = subject.tutorial_start
 			tutorial_end = subject.start_time
@@ -165,7 +218,7 @@ def generate_csv():
 			tut_duration = dt.total_seconds()
 			
 			#######WRITE INTO FILE
-			writer.writerow([name, gender, age, discipline, confidence, tut_duration, logic, diagram_use, familiarity, condition])
+			writer.writerow([name, gender, age, discipline, confidence, tut_duration, logic, diagram_use, familiarity, location, condition])
 
 	with open('static/docs/experimental_data.csv','w', newline="") as csvfile:
 		writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -193,7 +246,7 @@ def generate_csv():
 				duration = dt.total_seconds()
 				#time = dt.time
 				#duration = str(time.minute * 60 + time.second)
-				if answer == answers[int(nr_code)]:
+				if answer in answers[int(nr_code)]:
 					correct = 1
 				else:
 					correct = 0

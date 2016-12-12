@@ -42,6 +42,8 @@ class Subject(models.Model):
 	post1 = models.CharField(max_length=1, choices=USE_OF_DIAGRAMS, blank=True, null=True)
 	FAMILIARITY2 = (('1','Not familiar'),('2','Vaguely familiar'),('3','Very familiar'))
 	post2 = models.CharField(max_length=1, choices=FAMILIARITY2, blank=True, null=True)
+	NOISE = (('1','Noisy'),('2','Normal'),('3','Calm'))
+	post3 = models.CharField(max_length=1, choices=NOISE, blank=True, null=True)
 
 	def __unicode__(self):
 		return str(self.name)
@@ -50,10 +52,10 @@ class Subject(models.Model):
 		return str(self.name)
 
 class Question(models.Model):
-        ANSWER_OPTIONS = (('A','All C are A'),('B','No C are A'),('C','Some C are A'),('D','Some C are not A'),('E','No valid conclusion'))
+        ANSWER_OPTIONS = (('Aac','All A are C'),('Iac','Some A are C'),('Eac','No A are C'),('Oac','Some A are not C'),('Aca','All C are A'),('Ica','Some C are A'),('Eca','No C are A'),('Oca','Some C are not A'),('NVC','No valid conclusion'))
         nr_code = models.CharField(max_length=2, null=False)
         order_nr = models.CharField(max_length=2, null=False)
-        answer = models.CharField(max_length=1, choices=ANSWER_OPTIONS, null=True, blank=True)
+        answer = models.CharField(max_length=3, choices=ANSWER_OPTIONS, null=True, blank=True)
         #starttime = models.CharField(max_length=8, null=True)
         endtime = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
         subject = models.ForeignKey(Subject)

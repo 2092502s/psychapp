@@ -27,7 +27,7 @@ class TutorialForm(forms.ModelForm):
 class StartForm(forms.Form):
 	start = forms.BooleanField(help_text="Tick to confirm you are ready to start the experiment")
 
-ANSWER_OPTIONS = (('A','All C are A'),('B','No C are A'),('C','Some C are A'),('D','Some C are not A'),('E','No valid conclusion'))
+ANSWER_OPTIONS = (('Aac','All A are C'),('Iac','Some A are C'),('Eac','No A are C'),('Oac','Some A are not C'),('Aca','All C are A'),('Ica','Some C are A'),('Eca','No C are A'),('Oca','Some C are not A'),('NVC','No valid conclusion'))
 
 class QuestionForm(forms.ModelForm):
         answer = forms.ChoiceField(help_text="Select the valid conclusion", choices=ANSWER_OPTIONS, widget=forms.RadioSelect)
@@ -49,8 +49,9 @@ class EndForm(forms.ModelForm):
 	post1 = forms.ChoiceField(choices=USE_OF_DIAGRAMS, help_text="To what extent did you make use of diagrams in your solutions?", widget=forms.RadioSelect)
 	FAMILIARITY2 = (('1','Not familiar'),('2','Vaguely familiar'),('3','Very familiar'))
 	post2 = forms.ChoiceField(choices=FAMILIARITY2, help_text="How familiar were you with the diagram used?", widget=forms.RadioSelect)
-
+	NOISE = (('1','Difficult'),('2','OK'),('3','Very easy'))
+	post3 = forms.ChoiceField(choices=NOISE, help_text="How easy was it to concentrate in the place that you did the experiment?", widget=forms.RadioSelect)
 	
 	class Meta:
 		model = Subject
-		fields = ('preq1', 'preq2','preq3','post0','post1', 'post2',)
+		fields = ('preq1', 'preq2','preq3','post0','post1', 'post2','post3',)

@@ -10,183 +10,105 @@
 <h2>Please take the time necessary to understand the content of this short tutorial on solving categorical syllogisms.</h2>
 <br />
 <div style="font-size:150%;">
-<h3>What it means for an argument to valid</h3>
-<p> When we reason, we are concerned with statements about the world, such as "It is raining outside."
-A statement about the world can be thought of as a variable whose value is either 
-"true" or "false." Its value could be determined by observation, without abstract reasoning 
-(look outside of the window: <i>is</i> it raining?). If so, the statement is known as a <b>premise</b>.</p>
 
+<p> A <b>"categorical syllogism"</b> is a type of argument that consists of three statements: two premises and one conclusion.</p>
 
-<p>Alternatively, the value of a statement can be <i>deduced</i> from such premise. In that case, the statement is referred to as
-a <b>conclusion</b>. Premise-statements and conclusion-statements therefore play
-different roles in an argument. Premises provide the input; the conclusion the output. </p>
-
-<p> For an argument to be useful, it needs to be <b>valid</b>. This has a precise meaning: 
-in a valid argument, it is impossible for the
-premises to be true at the same time as the conclusion is false. The truth of the
-premises <i>implies</i> that the conclusion is true.</p>
+<p> Each statement relates two categories, by asserting that
+either all or part of the first class is included or excluded from the other. <br />
+ For categories A and B, this means that there are four different types of statement:</p>
 <br />
-<div style="display:block;margin-left:auto;margin-right:auto;"><img src="{% static "images/argument.png" %}" alt="argument" /></div>
-<br />
-
-<div>
-
-<h3>Categorical statements</h3>
-<p>A <b>categorical</b> statement is one that relates two categories, by asserting that
-either all or part of the first class is included or excluded from the other. 
-For categories A and B, this means that there are four different types of statement:</p>
-<p>
 <ul>
-	<li><b>All A are B:</b>Category A is wholly included in Category B </li>
+	<li><b>All A are B:</b>There exists at least one element in A, and A is wholly included in  B </li>
+	<br />
 	<li><b>Some A are B:</b>There exists at least one element in A that is included in B</li>
-	<li><b>No A are B:</b>Category A is wholly excluded from Category B</li>
+	<br />
+	<li><b>No A are B:</b>There exists at least one element in A and one in B, and A is wholly excluded from B</li>
+	<br />
 	<li><b>Some A are not B:</b>There exists at least one element in A that is excluded from B</li>
 </ul>
-These four different types ("All", "Some", "No" and "Some-not") can be visualised through "Euler diagrams":</p>
-</div>
+<br />
+<p> These four different types ("All", "Some", "No" and "Some-not") can be visualised through "Euler diagrams":</p>
 
-<div>
-<div style="float:left;border: 1px solid black;padding-top: 10px;"><img src="{% static "images/AllAareBeuler.png" %}" alt="AllAareBeuler" /></div>
-<div style="float:left;border: 1px solid black;padding-top: 10px;"><img src="{% static "images/SomeAareBeuler.png" %}" alt="SomeAareBeuler" /></div>
-<div style="float:left;border: 1px solid black;padding-top: 10px;"><img src="{% static "images/NoAareBeuler.png" %}" alt="NoAareBeuler" /></div>
-<div style="float:left;border: 1px solid black;padding-top: 10px;"><img src="{% static "images/SomeAarenotBeuler.png" %}" alt="SomeAarenotBeuler" /></div>
-</div>
+<br />
+<div style="display:block;margin-left:auto;margin-right:auto;"><img src="{% static "images/premisediagram.png" %}" alt="argument" /></div>
+<br />
 
-
-<br /><br /><br /><br /><br /><br />
 <p>In an Euler diagram, overlap means class inclusion and a cross means "There must exist an individual in this area for the statement to be true". 
-For example, the "Some A are B" statement means that there exists at least one element inside A that is also in B, but "All A are B" does <i>not</i>
-mean that there must actually exist an element inside A (hence no cross there).</p>
-<div>
-<h3>Categorical syllogisms</h3>
-<p>
-A <b>categorical syllogism</b> is an argument that has two premises and one conclusion. They are also limited to
-three different categories, which we may call A, B and C. The first premise is concerned with A and B, the second
-with B and C, and the conclusion is concerned with C and A.</p>
+For example, the "Some A are B" statement means that there exists at least one element inside A that is also in B, without there necessarily existing 
+an individual in the other, non-overlapping regions.</p>
 
-For example:
+<p>In a syllogism, the first premise states something about two categories, which we may call A and B. The second premise states something about B and C,
+and the conclusion states something about A and C. Thus, the category labeled B occurs in both premises but not in the conclusion. For example: </p>
+
 <p><b>All A are B</b></p>
 <p><b>No C are B</b></p>
 <p><b>-------------</b></p>
 <p><b>Therefore, no C are A</b></p>
-</div>
-
-<p>Valid conclusions can be of the four categorical types, always in the order of C-A:</p>
-
-<ul>
-	<li>All C are A</li>
-	<li>Some A are B</li>
-	<li>No A are B</li>
-	<li>Some A are not B</li>
-</ul>
-
-<p>If none of these follow from the premises, there is no valid conclusion. The syllogism structure is shown below:</p>
-
-<div><img src="{% static "images/structure.png" %}" alt="structure" /></div>
 
 {% ifequal condition "1" %}
 
-<h3>Euler Diagrams</h3>
-
-<p> Euler diagrams can be used to determine which conclusions are valid from two premises.</p>
+<p> Euler diagrams can be used to determine which conclusions are valid from two premises. They can be thought of as 
+metallic hoops in which the "necessary individual" dot is a pin.</p>
 <ol>
-<li>Depict each premise as an Euler diagram.</li>
-<li>Combine the two premise diagrams by making the B circles correspond (they refer, after all, to the same term).</li>
-<li>Check if any of the possible valid conclusions is true for the resultant diagram.</li>
-<li>If not, decide that no valid conclusion exists.</li>
+<li>Lay out hoops and pins to represent the premises.</li>
+<li>Resize one of the premises and move it so that the B-hoops align (they refer, after all, to the same term).</li>
+<li>Constrained by the pin, test all possible arrangements that are consistent with the premises and identify the one
+that creates as many subregions as possible (each region corresponds to a type of individual, and we don't want to forget any of them.</li>
+<li>If a hoop that is immediately surrounding a pin gets subdivided, remove that pin.</li>
 </ol>
 
-<p>An example is shown below. By unifying the diagrams for "No B are A" and "All C are B", we can read off that "No C are A",
- as the C and A circles are necessarily non-overlapping.</p>
+<p>After this has been done, we can read off the diagram, to see which relationships hold for A and C, i.e. which conclusions are valid.
+Dots that remain represent individuals that have been specified with regard to all three categories, so if there are no dots 
+remaining, we cannot conclude anything.</p>
 
-<div><img src="{% static "images/animation1.gif" %}" alt="animation1" /></div>
+<p>Below follow three examples of how to use Euler diagrams:</p>
 
-<p>Sometimes there are several ways of combining the diagrams. To make drawing conclusions easier, 
-it is preferred that we choose a combination that is consistent with the individual diagram meanings.
-In the example below, with premises "No B are A" and "Some C are B", there would be no point in making 
-all the three circles overlap, because we know from premise 1 that the A and B circles aren't supposed to overlap.
-Thus we can easily read off that "Some C are not A", because A and B are non-overlapping, yet C definitely has a member
- that is also in B.</p>
-
-<div><img src="{% static "images/animation2.gif" %}" alt="animation2" /></div>
-
-<p>Besides being consistent with the premises, the rule of thumb is to select the arrangement that creates the most subregions, 
-for it represents the maximum number of types. That way, we make sure not to forget any logically possible element.</p>
-
-<p>In the example below, with premises "All B are A" and "Some C are B", we could combine the diagrams such that A encircles both 
-C and B, but that way we don't represent elements that may be in C but not A - a possibility that the premises permit.
-By following th rule of thumb, we can read that some C are definitely A.</p>
-
-<div><img src="{% static "images/animation3.gif" %}" alt="animation3" /></div>
-
-<p>Diagrams can help detect whether or not a valid conclusion actually exists for the given premises. In the result diagram below,
- none of the possible conclusions follow logically. We can't say that "Some C are A" or that "Some C are not A" because there is 
- no cross in the relevant regions. Nor can we say that "All C are A" or "No C are A", because the diagram allows both that
- C is contained within A and completely excluded from it.</p>
-
-<div><img src="{% static "images/animation4.gif" %}" alt="animation4" /></div>
-
-<p>In the example below, the premises "Some A are not B" and "All B are C" do not give us information about where to place the cross
- when unifying the diagrams. As a result, we cannot draw any valid conclusion.</p>
-
-<div><img src="{% static "images/animation5.gif" %}" alt="animation5" /></div>
-
-<p>As a final example, consider the following diagram unification. Again, no valid conclusion in the C-A order can be drawn (it does not
- follow that "All C are A".) </p>
-
-<div><img src="{% static "images/animation6.gif" %}" alt="animation6" /></div>
-
+<br />
+<p>Premises: <b>"All A are B"</b> and <b>"Some C are not B"</b></p>
+<div style="display:block;margin-left:auto;margin-right:auto;"><img src="{% static "images/mechanistic_example1.png" %}" alt="argument" /></div>
+<p>Conclusion: "Some C are not A" </p>
+<br />
+<br />
+<p>Premises: <b>"All B are A"</b> and <b>"All B are C"</b></p>
+<div style="display:block;margin-left:auto;margin-right:auto;"><img src="{% static "images/mechanistic_example2.png" %}" alt="argument" /></div>
+<p>Conclusion: "Some A are C" </p>
+<br />
+<br />
+<p>Premises: <b>"Some A are B</b> and <b>"Some C are B"</b></p>
+<div style="display:block;margin-left:auto;margin-right:auto;"><img src="{% static "images/mechanistic_example3.png" %}" alt="argument" /></div>
+<p>Conclusion: "No valid conclusion" </p>
+<br />
 
 {% else %}
-<h1>CONDITION 1</h1>
-
-<p> Euler diagrams can be used to determine which conclusions are valid from two premises.</p>
+<p> Euler diagrams can be used to determine which conclusions are valid from two premises. </p>
 <ol>
-<li>Depict each premise as an Euler diagram.</li>
-<li>Combine the two premise diagrams by making the B circles correspond (they refer, after all, to the same term).</li>
-<li>Check if any of the possible valid conclusions is true for the resultant diagram.</li>
-<li>If not, decide that no valid conclusion exists.</li>
+<li>Make diagrams to represent the two premises.</li>
+<li>Make the B-rings correspond (they refer, after all, to the same term).</li>
+<li>Of all arrangements consistent with the initial diagrams, choose the one that creates the most subregions.</li>
+<li>If a minimal region with a dot (i.e. one closest to the dot) gets subdivided as a result, remove it.</li>
 </ol>
 
-<p>An example is shown below. By unifying the diagrams for "No B are A" and "All C are B", we can read off that "No C are A",
- as the C and A circles are necessarily non-overlapping.</p>
+<p>After this has been done, we can read off the diagram to see which relationships hold for A and C, i.e. which conclusions are valid.
+Dots that remain represent individuals that have been specified with regard to all three categories, so if there are no dots 
+remaining, we cannot conclude anything.</p>
 
-<div><img src="{% static "images/static1.png" %}" alt="static1" /></div>
+<p>Below follow three examples of how to use Euler diagrams:</p>
 
-<p>Sometimes there are several ways of combining the diagrams. To make drawing conclusions easier, 
-it is preferred that we choose a combination that is consistent with the individual diagram meanings.
-In the example below, with premises "No B are A" and "Some C are B", there would be no point in making 
-all the three circles overlap, because we know from premise 1 that the A and B circles aren't supposed to overlap.
-Thus we can easily read off that "Some C are not A", because A and B are non-overlapping, yet C definitely has a member
- that is also in B.</p>
-
-<div><img src="{% static "images/static2.png" %}" alt="static2" /></div>
-
-<p>Besides being consistent with the premises, the rule of thumb is to select the arrangement that creates the most subregions, 
-for it represents the maximum number of types. That way, we make sure not to forget any logically possible element.</p>
-
-<p>In the example below, with premises "All B are A" and "Some C are B", we could combine the diagrams such that A encircles both 
-C and B, but that way we don't represent elements that may be in C but not A - a possibility that the premises permit.
-By following th rule of thumb, we can read that some C are definitely A.</p>
-
-<div><img src="{% static "images/static3.png" %}" alt="static3" /></div>
-
-<p>Diagrams can help detect whether or not a valid conclusion actually exists for the given premises. In the result diagram below,
- none of the possible conclusions follow logically. We can't say that "Some C are A" or that "Some C are not A" because there is 
- no cross in the relevant regions. Nor can we say that "All C are A" or "No C are A", because the diagram allows both that
- C is contained within A and completely excluded from it.</p>
-
-<div><img src="{% static "images/static4.png" %}" alt="static4" /></div>
-
-<p>In the example below, the premises "Some A are not B" and "All B are C" do not give us information about where to place the cross
- when unifying the diagrams. As a result, we cannot draw any valid conclusion.</p>
-
-<div><img src="{% static "images/static5.png" %}" alt="static5" /></div>
-
-<p>As a final example, consider the following diagram unification. Again, no valid conclusion in the C-A order can be drawn (it does not
- follow that "All C are A".) </p>
-
-<div><img src="{% static "images/static6.png" %}" alt="static6" /></div>
+<br />
+<p>Premises: <b>"All A are B"</b> and <b>"Some C are not B"</b></p>
+<div style="display:block;margin-left:auto;margin-right:auto;"><img src="{% static "images/static_example1.png" %}" alt="argument" /></div>
+<p>Conclusion: <b>"Some C are not A"</b> </p>
+<br />
+<br />
+<p>Premises: <b>"All B are A"</b> and <b>"All B are C"</b></p>
+<div style="display:block;margin-left:auto;margin-right:auto;"><img src="{% static "images/static_example2.png" %}" alt="argument" /></div>
+<p>Conclusion: <b>"Some A are C"</b> and <b>"Some C are A"</b> </p>
+<br />
+<br />
+<p>Premises: <b>"Some A are B</b> and <b>"Some C are B"</b></p>
+<div style="display:block;margin-left:auto;margin-right:auto;"><img src="{% static "images/static_example3.png" %}" alt="argument" /></div>
+<p>Conclusion: <b>"No valid conclusion"</b> </p>
+<br />
 
 
 {% endifequal %}
