@@ -30,7 +30,7 @@ class StartForm(forms.Form):
 ANSWER_OPTIONS = (('Aac','All A are C'),('Iac','Some A are C'),('Eac','No A are C'),('Oac','Some A are not C'),('Aca','All C are A'),('Ica','Some C are A'),('Eca','No C are A'),('Oca','Some C are not A'),('NVC','No valid conclusion'))
 
 class QuestionForm(forms.ModelForm):
-        answer = forms.ChoiceField(help_text="Select one valid conclusion", choices=ANSWER_OPTIONS, widget=forms.RadioSelect)
+        answer = forms.ChoiceField(help_text="Select one valid conclusion (if several ones are valid, choose any of those)", choices=ANSWER_OPTIONS, widget=forms.RadioSelect)
         class Meta:
                 model = Question
                 fields = ('answer',)
