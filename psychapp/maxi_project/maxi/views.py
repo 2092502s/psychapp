@@ -43,49 +43,52 @@ import csv
 ##				["no","some"]]
 
 
-quantifiers = [["all", "all"],
-                ["all", "some"],
-                ["some", "some"],
-                ["all", "some-not"],
-                ["some-not", "all"],
-                ["some", "some-not"],
-                ["some-not","some"],
-                ["some-not", "no"],
-                ["some-not","some-not"],
-                ["some-not","some-not"],
-                ["some-not","some-not"],
-                ["all", "all"],
-                ["all", "all"],
-                ["some","all"],
-                ["all", "no"],
-                ["no","all"],
-                ["no","some"],
-                ["some-not","all"],
-                ["some-not","all"]]
+quantifiers = [["all", "all"],				#1
+                ["some", "all"],			#2
+                ["some", "some"],			#3
+                ["some-not", "all"],		#4
+                ["some-not", "all"],		#5
+                ["some-not", "some"],		#6
+                ["some-not","some"],		#7
+                ["some-not", "no"],			#8
+                ["some-not","some-not"],	#9
+                ["some-not","some-not"],	#10
+                ["some-not","some-not"],	#11
+                ["all", "all"],				#12
+                ["all", "all"],				#13
+                ["all","some"],				#14
+                ["no", "all"],				#15
+                ["all","no"],				#16
+                ["no","some"],				#17
+                ["some-not","all"],			#18
+                ["some-not","all"]] 		#19
                
 
-terms = [["A","B","C","B"],
-        ["B","A","C","B"],
-         ["A","B","C","B"],
-         ["B","A","C","B"],
-         ["A","B","B","C"],
-         ["B","A","C","B"],
-         ["A","B","C","B"],
-         ["A","B","C","B"],
-         ["A","B","C","B"],
-         ["A","B","B","C"],
-         ["B","A","B","C"],
-         ["A","B","B","C"],
-         ["B","A","B","C"],
-         ["B","A","C","B"],
-         ["B","A","C","B"],
-         ["B","A","C","B"],
-         ["A","B","B","C"],
-         ["B","A","B","C"],
-         ["A","B","C","B"]]
+terms = [["A","B","C","B"],		#1
+        ["B","A","C","B"],		#2
+         ["A","B","C","B"],		#3
+         ["B","A","C","B"],		#4
+         ["A","B","B","C"],		#5
+         ["B","A","C","B"],		#6
+         ["A","B","C","B"],		#7
+         ["A","B","C","B"],		#8
+         ["A","B","C","B"],		#9
+         ["A","B","B","C"],		#10
+         ["B","A","B","C"],		#11
+         ["A","B","B","C"],		#12
+         ["B","A","B","C"],		#13
+         ["B","A","C","B"],		#14
+         ["B","A","C","B"], 	#15
+         ["B","A","C","B"],		#16
+         ["A","B","B","C"],		#17
+         ["B","A","B","C"],		
+         ["A","B","C","B"]]		
          
-         
-
+answers = [["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"],
+           ["Aac","Iac"],["Iac","Ica"],["Iac","Ica"],["Eac","Eca"],["Oac"],["Oac","Oca"],["Oca"],["Oac"]]
+           
+codes = ["NP1", "NP2", "NP3", "NN1", "NN2", "NN3", "NN4", "NN5", "NN6", "NN7", "NN8", "VP1",
+         "VP2", "VP3", "VN1", "VN2", "VN3", "VN4", "VN5"]        
 
 ##terms = [["A","B","C","B"],
 ##		["B","A","B","C"],
@@ -126,12 +129,7 @@ terms = [["A","B","C","B"],
 ##         "AE4","EA1","EA2","EA3","EA4","AO1","AO2","AO3","AO4","OA1","OA2","OA3","OA4","EI1",
 ##         "EI2","EI3","EI4"]
 
-answers = [["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"], ["NVC"],
-           ["Aac","Iac"],["Iac","Ica"],["Iac","Ica"],["Eac","Eca"],["Oac"],["Oac","Oca"],["Ica","Oca"],["Oac"]]
-           
 
-codes = ["NP1", "NP2", "NP3", "NN1", "NN2", "NN3", "NN4", "NN5", "NN6", "NN7", "NN8", "VP1",
-         "VP2", "VP3", "VN1", "VN2", "VN3", "VN4", "VN5"]
 
 ##################################################################################################
 def create_syllogism_list(syl_string):					#Takes a string of index-integers as argument.
@@ -159,7 +157,7 @@ def create_syllogism_list(syl_string):					#Takes a string of index-integers as 
 				else:
 					syllogisms[i].append("Some " + terms[idx][0] + " are " + terms[idx][1])
 			else:
-				if quantifiers[i][j] == "all":
+				if quantifiers[idx][j] == "all":
 					syllogisms[i].append("All " + terms[idx][2] + " are " + terms[idx][3])
 				elif quantifiers[idx][j] == "no":
 					syllogisms[i].append("No " + terms[idx][2] + " are " + terms[idx][3])
@@ -172,23 +170,23 @@ def create_syllogism_list(syl_string):					#Takes a string of index-integers as 
 
 def create_random_order():
 
-	syl_list = list(range(0,19))
+	syl_list = list(range(0,19))		#simply create a list of 19 indices, shuffle and concatenate by '-'
 	shuffle(syl_list)
 	syl_string = '-'.join(str(x) for x in syl_list)
 	print(syl_string)
-	return syl_string
+	return syl_string					#will be saved in question-order field in Subject, effectively list of indices
 
-
-def create_code_list():
-	syl_list = list(range(0,19))
+### NOTE: THIS METHOD IS DEPRECATED, NOT ACTUALLY USED.
+def create_code_list(): 			
+	syl_list = list(range(0,19))	#Create a list of integers 0 to 18 (each nr serves as index in list of question-codes)
 	syl_order = syl_list
-	shuffle(syl_order)
+	shuffle(syl_order)				#Shuffle the list - this contains the order
 	syllogism_codes = syl_order[:]
 	for i in range(19):
-		idx = syl_order[i]
-		syllogism_codes[i] = codes[idx]
+		idx = syl_order[i]			#As you loop, take the index
+		syllogism_codes[i] = codes[idx] 	#Collect the question-code corresponding to the index
 
-	syl_string = '-'.join(syllogism_codes)
+	syl_string = '-'.join(syllogism_codes) 		#Create a string with '-' as separator
 	return syl_string
 
 #################################################################################################
@@ -374,6 +372,10 @@ def experiment(request, id, question_nr):
         context_dict['image2'] = "images/" + syllogism_list[int(current_q)][1].replace(' ','') + ".png"
         context_dict['question_nr'] = int(question_nr)
         context_dict['next_nr'] = int(question_nr) + 1
+        context_dict['syllogism_list'] = str(syllogism_list)
+        context_dict['syl_list'] = str(syl_list)
+        context_dict['current_q'] = current_q
+		
         if request.method == 'POST':
                 form = QuestionForm(request.POST)
                 if form.is_valid():

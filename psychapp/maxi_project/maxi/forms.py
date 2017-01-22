@@ -2,7 +2,7 @@ from django import forms
 from maxi.models import Subject, Question, Participant
 
 class ConsentForm(forms.ModelForm):
-	consent = forms.BooleanField(label="I consent to participate")
+	consent = forms.BooleanField(label="I confirm that I have understood this information, that participation is voluntary, and that I can withdraw at any time.")
 	class Meta:
 		model=Subject
 		fields = ('consent',)
@@ -30,7 +30,7 @@ class StartForm(forms.Form):
 ANSWER_OPTIONS = (('Aac','All A are C'),('Iac','Some A are C'),('Eac','No A are C'),('Oac','Some A are not C'),('Aca','All C are A'),('Ica','Some C are A'),('Eca','No C are A'),('Oca','Some C are not A'),('NVC','No valid conclusion'))
 
 class QuestionForm(forms.ModelForm):
-        answer = forms.ChoiceField(help_text="Select the valid conclusion", choices=ANSWER_OPTIONS, widget=forms.RadioSelect)
+        answer = forms.ChoiceField(help_text="Select one valid conclusion", choices=ANSWER_OPTIONS, widget=forms.RadioSelect)
         class Meta:
                 model = Question
                 fields = ('answer',)
@@ -45,11 +45,11 @@ class EndForm(forms.ModelForm):
 	preq3 = forms.ChoiceField(choices=DISCIPLINES, help_text="If at university, which discipline do you study?", widget=forms.RadioSelect)
 	PROPOSITIONAL_LOGIC = (('1','None'),('2','Some'),('3','A lot'))
 	post0 = forms.ChoiceField(choices=PROPOSITIONAL_LOGIC, help_text="How much experience do you have with syllogisms and propositional logic from before?", widget=forms.RadioSelect)
-	USE_OF_DIAGRAMS = (('1','Never'),('2','Occasionally'),('3','Every time'))	
+	USE_OF_DIAGRAMS = (('1','Never'),('2','Rarely'),('3','About half of the time'),('4','Very often'),('5','Every time'))	
 	post1 = forms.ChoiceField(choices=USE_OF_DIAGRAMS, help_text="To what extent did you make use of diagrams in your solutions?", widget=forms.RadioSelect)
 	FAMILIARITY2 = (('1','Not familiar'),('2','Vaguely familiar'),('3','Very familiar'))
 	post2 = forms.ChoiceField(choices=FAMILIARITY2, help_text="How familiar were you with the diagram used?", widget=forms.RadioSelect)
-	NOISE = (('1','Difficult'),('2','OK'),('3','Very easy'))
+	NOISE = (('1','Very Noisy'),('2','Noisy'), ('3','Normal'),('4','Calm'),('5','Very Calm'))
 	post3 = forms.ChoiceField(choices=NOISE, help_text="How easy was it to concentrate in the place that you did the experiment?", widget=forms.RadioSelect)
 	
 	class Meta:

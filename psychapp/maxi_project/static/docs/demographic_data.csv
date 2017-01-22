@@ -1,2 +1,4 @@
-ID,Gender,Age,Discipline,Confidence,Tutorial_Exp,Logic_Experience,Diagam_Use,Familiarity,Condition
-1,F,22,E,1,-8.873276,1,1,1,1
+ID,Gender,Age,Discipline,Confidence,Tutorial_Exp,Logic_Experience,Diagam_Use,Familiarity,Location,Condition
+1,,None,,3,-67.846967,,,,,1
+2,F,22,B,3,-11.462029,1,2,2,5,0
+3,M,50,A,1,-8.289925,1,5,1,2,1

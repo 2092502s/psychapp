@@ -38,11 +38,11 @@ class Subject(models.Model):
 	PROPOSITIONAL_LOGIC = (('1','None'),('2','Some'),('3','A lot'))
 	post0 = models.CharField(max_length=1, choices=PROPOSITIONAL_LOGIC, blank=True, null=True)
 	
-	USE_OF_DIAGRAMS = (('1','Never'),('2','Occasionally'),('3','Every time'))
+	USE_OF_DIAGRAMS = (('1','Never'),('2','Rarely'),('3','About half of the time'),('4','Very often'),('5','Every time'))
 	post1 = models.CharField(max_length=1, choices=USE_OF_DIAGRAMS, blank=True, null=True)
 	FAMILIARITY2 = (('1','Not familiar'),('2','Vaguely familiar'),('3','Very familiar'))
 	post2 = models.CharField(max_length=1, choices=FAMILIARITY2, blank=True, null=True)
-	NOISE = (('1','Noisy'),('2','Normal'),('3','Calm'))
+	NOISE = (('1','Very Noisy'),('2','Noisy'), ('3','Normal'),('4','Calm'),('5','Very Calm'))
 	post3 = models.CharField(max_length=1, choices=NOISE, blank=True, null=True)
 
 	def __unicode__(self):
