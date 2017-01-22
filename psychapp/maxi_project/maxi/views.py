@@ -195,7 +195,7 @@ def create_code_list():
 # SUBJECT_NR # QUESTION_CODE # DURATION
 def generate_csv():
 	#with open('static/docs/demographic_data.csv','w', newline="") as csvfile:
-	with open('demographic_data.csv','w') as csvfile:
+	with open('psychapp/psychapp/maxi_project/demographic_data.csv','w') as csvfile:
 		writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 		writer.writerow(['ID','Gender','Age','Discipline', 'Confidence', 'Tutorial_Exp','Logic_Experience','Diagam_Use','Familiarity','Location','Condition'])
 		all_subjects = Subject.objects.all()
@@ -220,7 +220,7 @@ def generate_csv():
 			writer.writerow([name, gender, age, discipline, confidence, tut_duration, logic, diagram_use, familiarity, location, condition])
 
 	#with open('static/docs/experimental_data.csv','w', newline="") as csvfile:
-	with open('experimental_data.csv','w') as csvfile:
+	with open('psychapp/psychapp/maxi_project/experimental_data.csv','w') as csvfile:
 		writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 		writer.writerow(['ID','Condition','Code','Order','Answer','Duration','Correct'])		
 		all_subjects = Subject.objects.all()
