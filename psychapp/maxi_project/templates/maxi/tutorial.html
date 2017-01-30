@@ -13,18 +13,18 @@
 
 <p> A <b>"categorical syllogism"</b> is a type of argument that consists of three statements: two premises and one conclusion.</p>
 
-<p> Each statement relates two categories, by asserting that
+<p> Each statement relates two classes of elements, by asserting that
 either all or part of the first class is included or excluded from the other. <br />
- For categories A and B, this means that there are four different types of statement:</p>
+ For classes A and B, this means that there are four different types of statement:</p>
 <br />
 <ul>
-	<li><b>All A are B:</b>There exists at least one element in A, and A is wholly included in  B </li>
+	<li><b>All A are B:</b> There exists at least one element in A, and A is wholly included in  B </li>
 	<br />
-	<li><b>Some A are B:</b>There exists at least one element in A that is included in B</li>
+	<li><b>Some A are B:</b> There exists at least one element in A that is included in B</li>
 	<br />
-	<li><b>No A are B:</b>There exists at least one element in A and one in B, and A is wholly excluded from B</li>
+	<li><b>No A are B:</b> There exists at least one element in A and one in B, and A is wholly excluded from B</li>
 	<br />
-	<li><b>Some A are not B:</b>There exists at least one element in A that is excluded from B</li>
+	<li><b>Some A are not B:</b> There exists at least one element in A that is excluded from B</li>
 </ul>
 <br />
 <p> These four different types ("All", "Some", "No" and "Some-not") can be visualised through "Euler diagrams":</p>
@@ -33,17 +33,17 @@ either all or part of the first class is included or excluded from the other. <b
 <div style="display:block;margin-left:auto;margin-right:auto;"><img src="{% static "images/premisediagram.png" %}" alt="argument" /></div>
 <br />
 
-<p>In an Euler diagram, overlap means class inclusion and a cross means "There must exist an individual in this area for the statement to be true". 
-For example, the "Some A are B" statement means that there exists at least one element inside A that is also in B, without there necessarily existing 
+<p>In an Euler diagram, overlap means class inclusion and a cross means "There must exist an individual in this area for the statement to be true".</p>
+ 
+<p> For example, the "Some A are B" statement means that there exists at least one element inside A that is also in B, without there necessarily existing 
 an individual in the other, non-overlapping regions.</p>
 
 <p>In a syllogism, the first premise states something about two categories, which we may call A and B. The second premise states something about B and C,
 and the conclusion states something about A and C. Thus, the category labeled B occurs in both premises but not in the conclusion. For example: </p>
 
-<p><b>All A are B</b></p>
-<p><b>No C are B</b></p>
-<p><b>-------------</b></p>
-<p><b>Therefore, no C are A</b></p>
+<p><b>Premise 1: </b>All A are B</p>
+<p><b>Premise 2: </b>No C are B</p>
+<p><b>Conclusion: </b>No C are A</p>
 
 {% ifequal condition "1" %}
 
@@ -57,9 +57,9 @@ that creates as many subregions as possible (each region corresponds to a type o
 <li>If a hoop that is immediately surrounding a pin gets subdivided, remove that pin.</li>
 </ol>
 
-<p>After this has been done, we can read off the diagram, to see which relationships hold for A and C, i.e. which conclusions are valid.
-Dots that remain represent individuals that have been specified with regard to all three categories, so if there are no dots 
-remaining, we cannot conclude anything.</p>
+<p>After this has been done, we can <b>ignore the B ring</b> and read off the diagram to see which relationships hold for A and C, i.e. which conclusions are valid.
+Dots that remain represent individuals that have been specified with regard to all three categories, so <b>if there are no dots 
+remaining, we cannot conclude anything</b>.</p>
 
 <p>Below follow three examples of how to use Euler diagrams:</p>
 
@@ -74,7 +74,7 @@ remaining, we cannot conclude anything.</p>
 <p>Conclusion: "Some A are C" </p>
 <br />
 <br />
-<p>Premises: <b>"Some A are B</b> and <b>"Some C are B"</b></p>
+<p>Premises: <b>"Some A are not B</b> and <b>"Some C are not B"</b></p>
 <div style="display:block;margin-left:auto;margin-right:auto;"><img src="{% static "images/mechanistic_example3.png" %}" alt="argument" /></div>
 <p>Conclusion: "No valid conclusion" </p>
 <br />
@@ -88,9 +88,9 @@ remaining, we cannot conclude anything.</p>
 <li>If a minimal region with a dot (i.e. one closest to the dot) gets subdivided as a result, remove it.</li>
 </ol>
 
-<p>After this has been done, we can read off the diagram to see which relationships hold for A and C, i.e. which conclusions are valid.
-Dots that remain represent individuals that have been specified with regard to all three categories, so if there are no dots 
-remaining, we cannot conclude anything.</p>
+<p>After this has been done, we can <b>ignore the B ring</b> read off the diagram to see which relationships hold for A and C, i.e. which conclusions are valid.
+Dots that remain represent individuals that have been specified with regard to all three categories, so <b>if there are no dots 
+remaining, we cannot conclude anything</b>.</p>
 
 <p>Below follow three examples of how to use Euler diagrams:</p>
 
@@ -105,7 +105,7 @@ remaining, we cannot conclude anything.</p>
 <p>Conclusion: <b>"Some A are C"</b> and <b>"Some C are A"</b> </p>
 <br />
 <br />
-<p>Premises: <b>"Some A are B</b> and <b>"Some C are B"</b></p>
+<p>Premises: <b>"Some A are not B</b> and <b>"Some C are not B"</b></p>
 <div style="display:block;margin-left:auto;margin-right:auto;"><img src="{% static "images/static_example3.png" %}" alt="argument" /></div>
 <p>Conclusion: <b>"No valid conclusion"</b> </p>
 <br />
@@ -115,11 +115,11 @@ remaining, we cannot conclude anything.</p>
 
 <h2>Your Task</h2>
 <p>You will now be given a set of syllogistic problems.
-Given the two premises, you are asked to select which conclusion is valid, or if no valid conclusion exists.</p>
-<p>In some cases, multiple conclusions are valid. In that case, you can only select one of them and it does not matter which.</p>
+Given the two premises, you are asked to <b>select which conclusion is valid</b>, or if no valid conclusion exists.</p>
+<p>In some cases, multiple conclusions are valid. In that case, <b>you can only select one of them</b> and <b>it does not matter which</b>.</p>
 <p>Once you start the experiment, you will not be able to revisit the tutorial.</p>
 
-<p>Please answer as quickly and accurately as possible.</p>
+<p>Please answer as <b>quickly</b> and <b>accurately</b> as possible.</p>
 </div>
 </div>
 </div>

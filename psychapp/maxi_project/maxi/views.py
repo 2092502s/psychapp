@@ -213,7 +213,7 @@ def generate_csv():
 			
 			tutorial_start = subject.tutorial_start
 			tutorial_end = subject.start_time
-			dt = tutorial_start - tutorial_end
+			dt = tutorial_end - tutorial_start
 			tut_duration = dt.total_seconds()
 			
 			#######WRITE INTO FILE
