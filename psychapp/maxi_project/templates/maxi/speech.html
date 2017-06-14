@@ -5,12 +5,17 @@
 	<!-- <script src="annyang.js"></script> -->
 	<!-- <script src="speechkitt.js"></script> -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+	<script src="../dist/speechkitt.min.js"></script>
 <script>
 // Annyang! experimentation
 
 alert("hello lovisa");
 
 if (annyang){
+
+	// Set annyang in debug mode
+	annyang.debug();
+
 	alert("Hello annyang found");
 	alert("Start talking");
         var commands = {
@@ -22,7 +27,7 @@ if (annyang){
 	annyang.addCommands(commands); //now annyang will listen for this
 
 	// Tell KITT to use annyang 
-  	//SpeechKITT.annyang();
+  	SpeechKITT.annyang();
 
     // Init the browser's own Speech Recognition
     //var recognition = new webkitSpeechRecognition();
@@ -39,16 +44,19 @@ if (annyang){
     // Register KITT's recognition end event with the browser's Speech Recognition
     //recognition.addEventListener('end', SpeechKITT.onEnd);
 	
-// Define a stylesheet for KITT to use 
-  //SpeechKITT.setStylesheet('flat.scss');
+	// Define a stylesheet for KITT to use 
+  	SpeechKITT.setStylesheet('flat.scss');
 
     // Add instructional texts
-    //SpeechKITT.setInstructionsText('Some commands to try…');
-    //SpeechKITT.setSampleCommands(['Show directions', 'Call restaurant']);
+    SpeechKITT.setInstructionsText('Some commands to try…');
+    SpeechKITT.setSampleCommands(['Show directions', 'Call restaurant']);
+ 
+    // If user clicks start button, remember his choice for 1 minute
+    SpeechKITT.rememberStatus(1);
  
   	// Render KITT's interface 
-  	//SpeechKITT.vroom();	
-       annyang.start(); 
+  	SpeechKITT.vroom();	
+       //annyang.start(); 
 	//annyang.start({ autoRestart: false, continuous: false}); //Don't restart following silence, stop after first recognition
 }
 
