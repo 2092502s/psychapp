@@ -190,6 +190,11 @@ def create_code_list():
 	return syl_string
 
 #################################################################################################
+def speech(request):
+	context_dict = {}
+	return render(request, 'maxi/speech.html', context_dict)
+
+
 # CSV-generation
 #format:
 # SUBJECT_NR # QUESTION_CODE # DURATION

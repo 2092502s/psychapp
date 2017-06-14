@@ -8,6 +8,7 @@ urlpatterns = patterns('',
 	url(r'^postexperiment/(?P<id>[\w\-]+)/$', views.postexperiment, name='postexperiment'),
 	url(r'^debriefing', views.debriefing, name='debriefing'),
 	url(r'^data', views.data, name='data'),
+        url(r'^speech', views.speech, name='speech'),
 	)
 	
 

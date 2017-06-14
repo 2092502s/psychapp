@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Page Title</title>
+	<script src="/annyang.js"></script>
+	<script src="/speechkitt.js"></script>
+<script>
+// Annyang! experimentation
+
+alert("hello lovisa");
+window.onload = function(){
+if (annyang){
+alert("Hello annyang found");
+alert("Start talking");
+        var commands = {
+            'Hello': function() {
+                alert('Hi! I can hear you.');
+            }
+        };
+
+	annyang.addCommands(commands); //now annyang will listen for this
+
+	// Tell KITT to use annyang 
+  	SpeechKITT.annyang();
+
+    // Init the browser's own Speech Recognition
+    var recognition = new webkitSpeechRecognition();
+
+    // Tell KITT the command to use to start listening
+    SpeechKITT.setStartCommand(function() {recognition.start()});
+
+    // Tell KITT the command to use to abort listening
+    SpeechKITT.setAbortCommand(function() {recognition.abort()});
+
+    // Register KITT's recognition start event with the browser's Speech Recognition
+    recognition.addEventListener('start', SpeechKITT.onStart);
+
+    // Register KITT's recognition end event with the browser's Speech Recognition
+    recognition.addEventListener('end', SpeechKITT.onEnd);
+	
+// Define a stylesheet for KITT to use 
+  SpeechKITT.setStylesheet('C:/Users/losu/Downloads/SpeechKITT-master/SpeechKITT-master/themes/flat/flat.scss');
+
+    // Add instructional texts
+    SpeechKITT.setInstructionsText('Some commands to try…');
+    SpeechKITT.setSampleCommands(['Show directions', 'Call restaurant']);
+ 
+  	// Render KITT's interface 
+  	SpeechKITT.vroom();	
+       // annyang.start(); 
+	//annyang.start({ autoRestart: false, continuous: false}); //Don't restart following silence, stop after first recognition
+}
+}
+</script>
+</head>
+<body>
+
+<h1>Speech recognition test</h1>
+
+</body>
+</html>
