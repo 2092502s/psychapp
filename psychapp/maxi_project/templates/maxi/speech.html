@@ -5,7 +5,7 @@
 	<!-- <script src="annyang.js"></script> -->
 	<!-- <script src="speechkitt.js"></script> -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
-	<script src="../dist/speechkitt.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/speechkitt.min.js"></script>
 <script>
 // Annyang! experimentation
 
@@ -15,6 +15,8 @@ if (annyang){
 
 	// Set annyang in debug mode
 	annyang.debug();
+	
+	annyang.setLanguage('en-GB');
 
 	alert("Hello annyang found");
 	alert("Start talking");
@@ -45,7 +47,7 @@ if (annyang){
     //recognition.addEventListener('end', SpeechKITT.onEnd);
 	
 	// Define a stylesheet for KITT to use 
-  	SpeechKITT.setStylesheet('/dist/themes/flat.css');
+  	SpeechKITT.setStylesheet("//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/themes/flat.css");
 
     // Add instructional texts
     SpeechKITT.setInstructionsText('Some commands to try…');
