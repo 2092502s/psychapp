@@ -67,6 +67,16 @@ if (annyang){
 <body>
 
 <h1>Speech recognition test</h1>
-
+	<div id="skitt-ui" class="skitt-ui--listening" style="display:none;">
+		<a id="skitt-toggle-button">&nbsp;</a>
+		<label for="skitt-toggle-button" id="skitt-toggle-button__label">Voice control</label>
+		<div id="skitt-listening-box">
+			<div id="skitt-listening-text">
+				<span id="skitt-listening-text__instructions">Some commands...</span>
+				<span id="skitt-listening-text__samples">Show fir. Call rest.</span>
+			</div>
+		</div>
+	</div>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/themes/flat.css" id="skitt-style-sheet">
 </body>
 </html>
