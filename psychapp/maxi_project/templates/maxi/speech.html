@@ -3,69 +3,117 @@
 <head>
 	<title>Page Title</title>
 	<!-- <script src="annyang.js"></script> -->
-	<!-- <script src="speechkitt.js"></script> -->
+	<!-- <script src="speechkitt.js"></script> 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/speechkitt.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/speechkitt.min.js"></script> -->
+	<script src="anatomylist.js"></script>
 <script>
-// Annyang! experimentation
 
 alert("hello lovisa");
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
-if (annyang){
+var anatomy = anatomylist;
+//Definition of grammar. Possible values separated by pipe character. 
+var grammar = '#JSGF V1.0; grammar anatomy; public <anatomypart> = '+ anatomy.join(' | ') + ' ;';
 
-	// Set annyang in debug mode
-	annyang.debug();
-	
-	annyang.setLanguage('en-GB');
 
-	alert("Hello annyang found");
-	alert("Start talking");
-        var commands = {
-            'Hello': function() {
-                alert('Hi! I can hear you.');
-            }
-        };
+//Initialise the browser's own speech recognition (assume Chrome)
+var recognition = new webkitSpeechRecognition();
+var speechRecognitionList = new SpeechGrammarList();
+speechRecognitionList.addFromString(grammar, 1);
+recognition.grammars = speechRecognitionList;
+//
+recognition.lang = 'en-GB';
+recognition.interimResults = false;
+recognition.maxAlternatives = 1;
 
-	annyang.addCommands(commands); //now annyang will listen for this
+var diagnostic = document.querySelector('.output'); //'output' is class name of a p element
+var bg = document.querySelector('html');
+var hints = document.querySelector('.hints');
 
-	// Tell KITT to use annyang 
-  	SpeechKITT.annyang();
+hints.innerHTML = 'Tap to say a bodypart.';
 
-    // Init the browser's own Speech Recognition
-    //var recognition = new webkitSpeechRecognition();
-
-    // Tell KITT the command to use to start listening
-    //SpeechKITT.setStartCommand(function() {recognition.start()});
-
-    // Tell KITT the command to use to abort listening
-    //SpeechKITT.setAbortCommand(function() {recognition.abort()});
-
-    // Register KITT's recognition start event with the browser's Speech Recognition
-    //recognition.addEventListener('start', SpeechKITT.onStart);
-
-    // Register KITT's recognition end event with the browser's Speech Recognition
-    //recognition.addEventListener('end', SpeechKITT.onEnd);
-	
-	// Define a stylesheet for KITT to use 
-  	SpeechKITT.setStylesheet("//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/themes/flat.css");
-
-    // Add instructional texts
-    SpeechKITT.setInstructionsText('Some commands to try…');
-    SpeechKITT.setSampleCommands(['Show directions', 'Call restaurant']);
- 
-    // If user clicks start button, remember his choice for 1 minute
-    SpeechKITT.rememberStatus(1);
- 
-  	// Render KITT's interface 
-  	SpeechKITT.vroom();	
-       //annyang.start(); 
-	//annyang.start({ autoRestart: false, continuous: false}); //Don't restart following silence, stop after first recognition
+document.body.onclick = function() {
+	recognition.start();
+	console.log('Ready to receive body part');
 }
 
+recognition.onresult = function(event){
+	
+	var last = event.results.length - 1;
+	var bodypart = event.results[last][0].transcript;
+	
+	diagnostic.textContent = 'Result received: '+bodypart+'.';
+	console.log('Confidence: '+ event.results[0][0].confidence);
+}
+
+recognition.onspeechend = function() {
+	recognition.stop();
+}
+
+recognition.onnomatch = function(event){
+	diagnostic.textContent = "I didn't recognise that body part.";
+}
+
+recognition.onerror = function(event){
+	diagnostic.textContent = 'Error occurred in recognition: '+ event.error;
+}
+
+//if (annyang){
+	// Set annyang in debug mode
+	//annyang.debug();
+	//annyang.setLanguage('en-GB');
+	//For simulation purposes
+	//annyang.trigger('Show me the liver');
+	//alert("Hello annyang found");
+	//alert("Start talking");
+        //var commands = {
+            //'Hello': function() {
+                //alert('Hi! I can hear you.');
+            //},
+			//'show me *bodypart': function(bodypart){
+				//alert('You asked for ' + bodypart); // splats;tag should be transcribed bodypart
+			//}
+        //};
+	//annyang.addCommands(commands); //now annyang will listen for this
+	// Tell KITT to use annyang 
+  	//SpeechKITT.annyang();
+    // Init the browser's own Speech Recognition
+    //var recognition = new webkitSpeechRecognition();
+    // Tell KITT the command to use to start listening
+    //SpeechKITT.setStartCommand(function() {recognition.start()});
+    // Tell KITT the command to use to abort listening
+    //SpeechKITT.setAbortCommand(function() {recognition.abort()});
+    // Register KITT's recognition start event with the browser's Speech Recognition
+    //recognition.addEventListener('start', SpeechKITT.onStart);
+    // Register KITT's recognition end event with the browser's Speech Recognition
+    //recognition.addEventListener('end', SpeechKITT.onEnd);
+	// Define a stylesheet for KITT to use 
+  	//SpeechKITT.setStylesheet("//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/themes/flat.css");
+    // Add instructional texts
+    //SpeechKITT.setInstructionsText('Some commands to try…');
+    //SpeechKITT.setSampleCommands(['Show directions', 'Call restaurant']);
+    // If user clicks start button, remember his choice for 1 minute
+    //SpeechKITT.rememberStatus(1);
+  	// Render KITT's interface 
+  	//SpeechKITT.vroom();	
+       //annyang.start(); 
+	//annyang.start({ autoRestart: false, continuous: false}); //Don't restart following silence, stop after first recognition
+//}
+
 </script>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <p class="hints"></p>
+    <div>
+        <p class="output"><em>...diagnostic messages</em></p>
+    </div>
 
+
+<!--
 <h1>Speech recognition test</h1>
 	<div id="skitt-ui" class="skitt-ui--listening" style="display:none;">
 		<a id="skitt-toggle-button">&nbsp;</a>
@@ -78,5 +126,6 @@ if (annyang){
 		</div>
 	</div>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/themes/flat.css" id="skitt-style-sheet">
+-->
 </body>
 </html>
