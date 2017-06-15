@@ -25,6 +25,10 @@ var SpeechRecognition = webkitSpeechRecognition
 var SpeechGrammarList = webkitSpeechGrammarList
 var SpeechRecognitionEvent = webkitSpeechRecognitionEvent
 
+if (SpeechRecognition){
+	alert("sr found");
+}
+
 var anatomy = anatomylist;
 //Definition of grammar. Possible values separated by pipe character. 
 var grammar = '#JSGF V1.0; grammar anatomy; public <anatomypart> = '+ anatomy.join(' | ') + ' ;';
