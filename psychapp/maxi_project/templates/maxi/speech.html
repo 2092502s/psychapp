@@ -21,22 +21,21 @@
 <script>
 
 alert("hello lovisa");
-var SpeechRecognition = webkitSpeechRecognition
-var SpeechGrammarList = webkitSpeechGrammarList
-var SpeechRecognitionEvent = webkitSpeechRecognitionEvent
 
-if (SpeechRecognition){
-	alert("sr found");
-}
+
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
 var anatomy = anatomylist;
 //Definition of grammar. Possible values separated by pipe character. 
 var grammar = '#JSGF V1.0; grammar anatomy; public <anatomypart> = '+ anatomy.join(' | ') + ' ;';
-
+alert(anatomy[0]);
 
 //Initialise the browser's own speech recognition (assume Chrome)
 var recognition = new webkitSpeechRecognition();
-var speechRecognitionList = new SpeechGrammarList();
+if (recognition){
+	alert("sr found");
+}
+var speechRecognitionList = new webkitSpeechGrammarList();
 speechRecognitionList.addFromString(grammar, 1);
 recognition.grammars = speechRecognitionList;
 //
