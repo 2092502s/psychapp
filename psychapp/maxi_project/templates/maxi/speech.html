@@ -7,12 +7,23 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/speechkitt.min.js"></script> -->
 	<script src="anatomylist.js"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <p class="hints"></p>
+    <div>
+        <p class="output"><em>...diagnostic messages</em></p>
+    </div>
+
+
 <script>
 
 alert("hello lovisa");
-var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
-var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
-var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+var SpeechRecognition = webkitSpeechRecognition
+var SpeechGrammarList = webkitSpeechGrammarList
+var SpeechRecognitionEvent = webkitSpeechRecognitionEvent
 
 var anatomy = anatomylist;
 //Definition of grammar. Possible values separated by pipe character. 
@@ -104,14 +115,6 @@ recognition.onerror = function(event){
 //}
 
 </script>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <p class="hints"></p>
-    <div>
-        <p class="output"><em>...diagnostic messages</em></p>
-    </div>
-
 
 <!--
 <h1>Speech recognition test</h1>
