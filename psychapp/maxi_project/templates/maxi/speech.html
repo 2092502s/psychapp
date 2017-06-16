@@ -52,20 +52,31 @@ recognition.grammars = speechRecognitionList;      ///Critical, stops working!
 alert("health check");
 recognition.lang = 'en-GB';
 recognition.interimResults = false;
-//recognition.continuous = false;
+recognition.continuous = false;
 recognition.maxAlternatives = 1;
 recognition.start();
 
 recognition.onresult = function(e){
         document.getElementById('transcript').value = e.results[0][0].transcript;
 		alert(e.results[0][0].transcript);
-        recognition.stop();
+        //recognition.stop();
         document.getElementById('labnol').submit();
 };
 
 //function that checks whether substring was in that said
 var userSaid = function(str,s){
 	return str.indexOf(s) > -1;
+}
+
+recognition.onspeechend = function() {
+  recognition.stop();
+}
+recognition.onnomatch = function(event) {
+  alert('I didnt recognise that.');
+}
+
+recognition.onerror = function(event) {
+  alert('Error');
 }
 
 /// Alternative onresult
