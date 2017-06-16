@@ -61,7 +61,8 @@ recognition.onresult = function(e){
         document.getElementById('transcript').value = text;
 		//alert(text);
 		var textarray = text.split()
-		alert(textarray);
+		alert(typeof(textarray));
+		alert(typeof(textarray.length));
 		//if (textarray[0] !== 'navigate' || textarray[1] !== 'to' || textarray[2] !== 'the'){
 		//	alert("Error");
 		//}else{
