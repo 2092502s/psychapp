@@ -70,7 +70,7 @@ var userSaid = function(str,s){
 
 /// Alternative onresult
 recognition.onresult = function(e){
-
+	alert("result obtained");
 	for (var i = e.resultIndex; i < e.results.length; ++i) {
 		if (e.results[i].isFinal) {	
 			var str = e.results[i][0].transcript;
