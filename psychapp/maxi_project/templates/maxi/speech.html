@@ -48,7 +48,7 @@ var recognition = new webkitSpeechRecognition();
 
 var speechRecognitionList = new webkitSpeechGrammarList();
 speechRecognitionList.addFromString(grammar, 1); //1 defines weight importance of grammar
-recognition.grammars = speechRecognitionList;      ///Critical, stops working!
+//recognition.grammars = speechRecognitionList;      ///Critical, stops working!
 alert("health check");
 recognition.lang = 'en-GB';
 recognition.interimResults = false;
