@@ -55,7 +55,7 @@ recognition.interimResults = false;
 recognition.continuous = false;
 //recognition.maxAlternatives = 1;
 recognition.start();
-
+alert("hi");
 recognition.onresult = function(e){
         document.getElementById('transcript').value = e.results[0][0].transcript;
 		alert(e.results[0][0].transcript);
@@ -64,9 +64,9 @@ recognition.onresult = function(e){
 };
 
 //function that checks whether substring was in that said
-var userSaid = function(str,s){
-	return str.indexOf(s) > -1;
-}
+//var userSaid = function(str,s){
+//	return str.indexOf(s) > -1;
+//}
 
 /// Alternative onresult
 //recognition.onresult = function(e){
