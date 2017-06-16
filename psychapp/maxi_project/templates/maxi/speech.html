@@ -35,7 +35,7 @@ var anatomylist = ['body', 'surface layer', 'muscles and connective tissue', 'sk
 
 var anatomy = anatomylist;
 //Definition of grammar. Possible values separated by pipe character. 
-var grammar = '#JSGF V1.0; grammar anatomy; public <anatomypart> = navigate to the ('+ anatomy.join(' | ') + ');';
+var grammar = '#JSGF V1.0; grammar anatomy; public <anatomypart> = navigate to the ('+ anatomy.join(' | ') + ' );';
 //alert(anatomy[0]);
 
 //Initialise the browser's own speech recognition (assume Chrome)
@@ -47,13 +47,13 @@ var recognition = new webkitSpeechRecognition();
 //We may consider having a confidence threshold
 
 var speechRecognitionList = new webkitSpeechGrammarList();
-speechRecognitionList.addFromString(grammar, 1);
-//recognition.grammars = speechRecognitionList;      ///Critical, stops working!
-//
+speechRecognitionList.addFromString(grammar, 1); //1 defines weight importance of grammar
+recognition.grammars = speechRecognitionList;      ///Critical, stops working!
+alert("health check");
 recognition.lang = 'en-GB';
 recognition.interimResults = false;
-recognition.continuous = false;
-//recognition.maxAlternatives = 1;
+//recognition.continuous = false;
+recognition.maxAlternatives = 1;
 recognition.start();
 
 recognition.onresult = function(e){
