@@ -75,6 +75,7 @@ recognition.onresult = function(e){
 		if (e.results[i].isFinal) {	
 			var str = e.results[i][0].transcript;
 			console.log('Recognised: ');
+			document.getElementById('transcript').value = str;
 			
 			if (userSaid(str, 'show me')){
 				alert('show me command recognised');
@@ -83,6 +84,8 @@ recognition.onresult = function(e){
 			}
 		}
 	}
+	recognition.stop();
+	document.getElementById('labnol').submit();
 };
 
 
