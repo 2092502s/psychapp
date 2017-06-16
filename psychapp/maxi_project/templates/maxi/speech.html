@@ -61,7 +61,7 @@ recognition.onresult = function(e){
         document.getElementById('transcript').value = text;
 		//alert(text);
 		var textarray = text.split()
-		if (textarray[0] != 'navigate' || textarray[1] != 'to' || textarray[2] != 'the'){
+		if (textarray[0] !== 'navigate' || textarray[1] !== 'to' || textarray[2] !== 'the'){
 			alert("Error");
 		}else{
 			var retrievedbodypart = textarray.slice(3,textarray.length);
