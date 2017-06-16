@@ -59,7 +59,7 @@ recognition.start();
 recognition.onresult = function(e){
 		var text = e.results[0][0].transcript;
         document.getElementById('transcript').value = text;
-		//alert(text);
+		alert(text);
 		var textarray = text.split()
 		if (textarray[0] !== 'navigate' || textarray[1] !== 'to' || textarray[2] !== 'the'){
 			alert("Error");
