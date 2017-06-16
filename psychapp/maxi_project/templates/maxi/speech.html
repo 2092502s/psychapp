@@ -49,7 +49,7 @@ var recognition = new webkitSpeechRecognition();
 var speechRecognitionList = new webkitSpeechGrammarList();
 speechRecognitionList.addFromString(grammar, 1); //1 defines weight importance of grammar
 //recognition.grammars = speechRecognitionList;      ///Critical, stops working!
-alert("health check");
+
 recognition.lang = 'en-GB';
 recognition.interimResults = false;
 recognition.continuous = false;
@@ -59,8 +59,9 @@ recognition.start();
 recognition.onresult = function(e){
 		var text = e.results[0][0].transcript;
         document.getElementById('transcript').value = text;
-		alert(text);
+		//alert(text);
 		var textarray = text.split()
+		alert(textarray.toString());
 		if (textarray[0] !== 'navigate' || textarray[1] !== 'to' || textarray[2] !== 'the'){
 			alert("Error");
 		}else{
