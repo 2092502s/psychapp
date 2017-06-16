@@ -12,9 +12,9 @@
 
 <body>
 <style>
-  .speech {border: 1px solid #DDD; width: 300px; padding: 0; margin: 0}
+  .speech {border: 1px solid #DDD; width: 300px; padding: 0; margin: 0;}
   .speech input {border: 0; width: 240px; display: inline-block; height: 30px;}
-  .speech img {float: right; width: 40px }
+  .speech img {float: right; width: 40px;}
 </style>
 <!-- Search Form -->
 <form id="labnol" method="get" action="https://www.google.com/search">
@@ -36,13 +36,16 @@ var anatomylist = ['body', 'surface layer', 'muscles and connective tissue', 'sk
 var anatomy = anatomylist;
 //Definition of grammar. Possible values separated by pipe character. 
 var grammar = '#JSGF V1.0; grammar anatomy; public <anatomypart> = '+ anatomy.join(' | ') + ' ;';
-alert(anatomy[0]);
+//alert(anatomy[0]);
 
 //Initialise the browser's own speech recognition (assume Chrome)
 var recognition = new webkitSpeechRecognition();
-if (recognition){
-	alert("sr found");
-}
+//if (recognition){
+//	alert("sr found");
+//}
+
+//We may consider having a confidence threshold
+
 var speechRecognitionList = new webkitSpeechGrammarList();
 speechRecognitionList.addFromString(grammar, 1);
 recognition.grammars = speechRecognitionList;
@@ -54,8 +57,29 @@ recognition.stop();
 
 recognition.onresult = function(e){
         document.getElementById('transcript').value = e.results[0][0].transcript;
+		alert(e.results[0][0].transcript);
         recognition.stop();
         document.getElementById('labnol').submit();
+};
+
+//function that checks whether substring was in that said
+var userSaid = function(str,s){
+	return str.indexOf(s) > -1;
+}
+
+/// Alternative onresult
+recognition.onresult = function(e){
+
+	for (var i = e.resultIndex; i < e.results.length; ++i) {
+		if (e.results[i].isFinal) {	
+			var str = e.results[i][0].transcript;
+			console.log('Recognised: ');
+			
+			if (userSaid(str, 'show me')){
+				alert('show me command recognised');
+			}
+		}
+	}
 };
 
 
