@@ -82,10 +82,11 @@ recognition.onresult = function(e){
 			//}else{
 			//	alert('say show me');
 			//}
+			recognition.stop();
+			document.getElementById('labnol').submit();
 		}
 	}
-	recognition.stop();
-	document.getElementById('labnol').submit();
+
 };
 
 
