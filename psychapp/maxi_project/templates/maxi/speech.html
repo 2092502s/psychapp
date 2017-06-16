@@ -56,12 +56,12 @@ recognition.continuous = false;
 //recognition.maxAlternatives = 1;
 recognition.start();
 
-//recognition.onresult = function(e){
-//        document.getElementById('transcript').value = e.results[0][0].transcript;
-//		alert(e.results[0][0].transcript);
-//        recognition.stop();
-//        document.getElementById('labnol').submit();
-//};
+recognition.onresult = function(e){
+        document.getElementById('transcript').value = e.results[0][0].transcript;
+		alert(e.results[0][0].transcript);
+        recognition.stop();
+        document.getElementById('labnol').submit();
+};
 
 //function that checks whether substring was in that said
 var userSaid = function(str,s){
@@ -69,25 +69,25 @@ var userSaid = function(str,s){
 }
 
 /// Alternative onresult
-recognition.onresult = function(e){
-	alert("result obtained");
-	for (var i = e.resultIndex; i < e.results.length; ++i) {
-		if (e.results[i].isFinal) {	
-			var str = e.results[i][0].transcript;
-			console.log('Recognised: ');
-			document.getElementById('transcript').value = str;
+//recognition.onresult = function(e){
+//	alert("result obtained");
+//	for (var i = e.resultIndex; i < e.results.length; ++i) {
+//		if (e.results[i].isFinal) {	
+//			var str = e.results[i][0].transcript;
+//			console.log('Recognised: ');
+//			document.getElementById('transcript').value = str;
 			
 			//if (userSaid(str, 'show me')){
 			//	alert('show me command recognised');
 			//}else{
 			//	alert('say show me');
 			//}
-			recognition.stop();
-			document.getElementById('labnol').submit();
-		}
-	}
+//			recognition.stop();
+//			document.getElementById('labnol').submit();
+//		}
+//	}
 
-};
+//};
 
 
 recognition.onerror = function(event){
