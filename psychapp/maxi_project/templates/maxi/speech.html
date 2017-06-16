@@ -55,7 +55,7 @@ recognition.interimResults = false;
 recognition.continuous = false;
 //recognition.maxAlternatives = 1;
 recognition.start();
-alert("hi");
+
 //recognition.onresult = function(e){
 //        document.getElementById('transcript').value = e.results[0][0].transcript;
 //		alert(e.results[0][0].transcript);
@@ -77,11 +77,11 @@ recognition.onresult = function(e){
 			console.log('Recognised: ');
 			document.getElementById('transcript').value = str;
 			
-			if (userSaid(str, 'show me')){
-				alert('show me command recognised');
-			}else{
-				alert('say show me');
-			}
+			//if (userSaid(str, 'show me')){
+			//	alert('show me command recognised');
+			//}else{
+			//	alert('say show me');
+			//}
 		}
 	}
 	recognition.stop();
