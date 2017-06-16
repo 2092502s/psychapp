@@ -35,7 +35,7 @@ var anatomylist = ['body', 'surface layer', 'muscles and connective tissue', 'sk
 
 var anatomy = anatomylist;
 //Definition of grammar. Possible values separated by pipe character. 
-var grammar = '#JSGF V1.0; grammar anatomy; public <anatomypart> = '+ anatomy.join(' | ') + ' ;';
+////////var grammar = '#JSGF V1.0; grammar anatomy; public <anatomypart> = '+ anatomy.join(' | ') + ' ;';
 //alert(anatomy[0]);
 
 //Initialise the browser's own speech recognition (assume Chrome)
@@ -46,14 +46,15 @@ var recognition = new webkitSpeechRecognition();
 
 //We may consider having a confidence threshold
 
-var speechRecognitionList = new webkitSpeechGrammarList();
-speechRecognitionList.addFromString(grammar, 1);
-recognition.grammars = speechRecognitionList;
+/////////////var speechRecognitionList = new webkitSpeechGrammarList();
+////////////speechRecognitionList.addFromString(grammar, 1);
+///////////recognition.grammars = speechRecognitionList;
 //
 recognition.lang = 'en-GB';
 recognition.interimResults = false;
-recognition.maxAlternatives = 1;
-recognition.stop();
+recognition.continuous = false;
+//recognition.maxAlternatives = 1;
+recognition.start();
 
 recognition.onresult = function(e){
         document.getElementById('transcript').value = e.results[0][0].transcript;
@@ -68,19 +69,19 @@ var userSaid = function(str,s){
 }
 
 /// Alternative onresult
-recognition.onresult = function(e){
+//recognition.onresult = function(e){
 
-	for (var i = e.resultIndex; i < e.results.length; ++i) {
-		if (e.results[i].isFinal) {	
-			var str = e.results[i][0].transcript;
-			console.log('Recognised: ');
+//	for (var i = e.resultIndex; i < e.results.length; ++i) {
+//		if (e.results[i].isFinal) {	
+//			var str = e.results[i][0].transcript;
+//			console.log('Recognised: ');
 			
-			if (userSaid(str, 'show me')){
-				alert('show me command recognised');
-			}
-		}
-	}
-};
+//			if (userSaid(str, 'show me')){
+//				alert('show me command recognised');
+//			}
+//		}
+//	}
+//};
 
 
 recognition.onerror = function(event){
